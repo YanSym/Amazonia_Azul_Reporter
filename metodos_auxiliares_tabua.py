@@ -94,21 +94,7 @@ class HelperClassTabua:
         self.path_pesca_bom = '//*[@id="circulo_estado_grafico_barometro2_1"]'
         self.path_pesca_mau = '//*[@id="circulo_estado_grafico_barometro3_1"]'
         self.path_ultra_violeta = '//*[@id="uv_maximo_img_num"]'
-
-
-    def verifica_tweet_ok(self, tweet):
-        '''
-        Verifica se o tweet está ok
-        '''
-        # verifica se tweet possui palavras proibidas
-        palavras_tweet = tweet.split(' ')
-        for palavra in palavras_tweet:
-            if palavra in self.lista_palavras_banidas:
-                return 0
-
-        # tweet ok
-        return 1
-    
+        
 
     # retorna dia atual
     def get_dia_atual(self):

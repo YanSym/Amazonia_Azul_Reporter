@@ -5,7 +5,10 @@ class Twitter_Class:
     """
     Classe API do Twitter
     """
-    def __init__(self, path_infos_json="credenciais_twitter.json"):
+    def __init__(self):
+        
+        # path json twitter
+        path_infos_json="credenciais_twitter.json"
     
         # leitura do arquivo json com as credenciais
         f = open(path_infos_json, "r")
@@ -39,3 +42,23 @@ class Twitter_Class:
         """
         # publica o Tweet
         self.api.update_status(tweet);
+        
+        
+    def verifica_tweet_ok(tweet):
+        '''
+        Verifica se o tweet está ok
+        '''
+        # Leitura das palavras banidas
+        f = open("lista_palavras_banidas.txt", "r")
+        lista_palavras_banidas = f.read().split('\n')
+        f.close()
+        
+        # verifica se tweet possui palavras proibidas
+        for delimitador in [' ', '-', '_']:
+            palavras_tweet = tweet.split(delimitador)
+            for palavra in palavras_tweet:
+                if palavra in lista_palavras_banidas:
+                    return 0
+
+        # tweet ok
+        return 1

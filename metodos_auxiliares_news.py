@@ -16,13 +16,12 @@ class HelperClassNews:
     def __init__(self):
         
         # arquivos auxiliares
-        self.path_json_parametros_news="parametros_news.json"
-        self.path_json_parametros_twitter="parametros_twitter.json"
-        self.path_palavras_banidas="lista_palavras_banidas.txt"
-        self.path_noticias_bd='noticias_bd.csv'
+        path_json_parametros_news="parametros_news.json"
+        path_json_parametros_twitter="parametros_twitter.json"
+        self.path_noticias_bd="noticias_bd.csv"
 
         # leitura do arquivo json com os parâmetros das notícias
-        f = open(self.path_json_parametros_news, "r")
+        f = open(path_json_parametros_news, "r")
         infos = json.load(f)
         self.dict_header = {"User-Agent":infos['header']}
         self.url_google_news = infos['url_google_news']
@@ -32,15 +31,10 @@ class HelperClassNews:
         f.close()
         
         # leitura do arquivo json com os parâmetros
-        f = open(self.path_json_parametros_twitter, "r")
+        f = open(path_json_parametros_twitter, "r")
         infos = json.load(f)
         self.limite_caracteres = int(infos['limite_caracteres'])
         self.flag_tweet = int(infos["flag_tweet"])
-        f.close()
-
-        # Leitura das palavras banidas
-        f = open(self.path_palavras_banidas, "r")
-        self.lista_palavras_banidas = f.read().split('\n')
         f.close()
 
         # mapeamento de meses
@@ -57,20 +51,6 @@ class HelperClassNews:
                11: 'novembro',
                12: 'dezembro'
                }
-
-
-    def verifica_tweet_ok(self, tweet):
-        '''
-        Verifica se o tweet está ok
-        '''
-        # verifica se tweet possui palavras proibidas
-        palavras_tweet = tweet.split(' ')
-        for palavra in palavras_tweet:
-            if palavra in self.lista_palavras_banidas:
-                return 0
-
-        # tweet ok
-        return 1
 
 
     # retorna dia atual
@@ -102,6 +82,10 @@ class HelperClassNews:
 
         # filtra noticias que ainda não foram publicadas
         df_news = df_news.loc[~df_news['Noticia'].isin(lista_news_publicadas)]
+        
+        if (len(df_news) == 0):
+            print ('df vazio')
+            return 0, "", "" 
 
         # primeira linha das notícias
         try:
@@ -116,7 +100,7 @@ class HelperClassNews:
         tweet = self.prepara_tweet(df_tweet['Noticia'], df_tweet['Link'], data_hoje)
 
         # verifica se tweet está ok
-        if (self.verifica_tweet_ok(tweet) and len(tweet) <= self.limite_caracteres):
+        if (Twitter_Class.verifica_tweet_ok(tweet) and len(tweet) <= self.limite_caracteres):
             return 1, df_tweet['Noticia'], tweet
         else:
             return 0, "", ""
@@ -145,7 +129,7 @@ class HelperClassNews:
         # verifica se tweet está ok
         if (flag_tweet_ok):
             try:
-                twitter_api = Twitter_Class('credenciais_twitter.json')
+                twitter_api = Twitter_Class()
                 self.adiciona_noticia_bd(noticia)
                 twitter_api.make_tweet(tweet)
                 print ('Tweet publicado!')
@@ -154,7 +138,7 @@ class HelperClassNews:
                 print (f"Erro: {e}")
 
         else:
-            print ('Não consegui publicar.')
+            print ('Não consegui publicar. Algo errado no tweet.')
 
                 
     def gera_url_tinyurl(self, url_long):

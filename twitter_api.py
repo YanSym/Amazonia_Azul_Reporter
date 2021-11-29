@@ -54,6 +54,21 @@ class TwitterClass:
         except:
             print("Erro de autenticação!")
             self.api = ''
+            
+
+        self.dict_map_mes = {1: 'janeiro',
+                             2: 'fevereiro',
+                             3: 'março',
+                             4: 'abril',
+                             5: 'maio',
+                             6: 'junho',
+                             7: 'julho',
+                             8: 'agosto',
+                             9: 'setembro',
+                             10: 'outubro',
+                             11: 'novembro',
+                             12: 'dezembro'
+                             }
     
     
     @staticmethod
@@ -62,6 +77,15 @@ class TwitterClass:
         Retorna distância entre strings
         '''
         return (Levenshtein.distance(string1, string2)/max(len(string1), len(string2)))
+    
+    
+    def valida_tamanho_tweet(self, tweet):
+        flag = (len(tweet) <= self.limite_caracteres)
+        return flag
+    
+    
+    def get_map_meses(self):
+        return self.dict_map_mes
     
 
     def get_status_twitter(self):
@@ -100,13 +124,6 @@ class TwitterClass:
         # tweet ok
         return 1
     
-    
-    def get_max_len_tweet(self):
-        '''
-        Retorna tamanho máximo do tweet
-        '''
-        return self.limite_caracteres
-    
 
     def verifica_tweet_pode_ser_publicado(self, tweet):
         '''
@@ -119,6 +136,7 @@ class TwitterClass:
         for tweet_publicado in lista_tweets_publicados[:100]:
             distancia = TwitterClass.calcula_distancia_strings(tweet, tweet_publicado)
             if (distancia < self.distancia_minima_tweets):
+                print (f'Distancia pequena de {distancia}. Tweet vetado, muito similar.')
                 return 0
         
         # tweet ok

@@ -31,25 +31,16 @@ class CuriosidadesClass:
         self.lista_curiosidades = pd.read_csv("curiosidades.csv", sep=';', encoding='latin1')['Curiosidade']
         
         # mapeamento de meses
-        self.dict_map_mes = {1: 'janeiro',
-                             2: 'fevereiro',
-                             3: 'março',
-                             4: 'abril',
-                             5: 'maio',
-                             6: 'junho',
-                             7: 'julho',
-                             8: 'agosto',
-                             9: 'setembro',
-                             10: 'outubro',
-                             11: 'novembro',
-                             12: 'dezembro'
-                             }
+        self.dict_map_mes = self.twitter_api.get_map_meses()
         
         # data de hoje
         dia = date.today().strftime("%d")
         mes = self.dict_map_mes[int(date.today().strftime("%m"))]
         ano = date.today().strftime("%Y")
         self.data_hoje_completa = f"{dia} de {mes} de {ano}"
+        
+        # hashtag do post
+        self.hashtag = "\n#AmazôniaAzul\n#redebotsdobem"
         
         
     def check_dia_publicar(self):
@@ -83,9 +74,14 @@ class CuriosidadesClass:
         '''
         flag_pode_ser_publicado, curiosidade = self.seleciona_curiosidade()
         if flag_pode_ser_publicado == 0:
-            return 1, ""
+            return 0, ""
         
-        tweet = "Você sabia?\n" + curiosidade + "\n\n" + self.data_hoje_completa + "\n#redebotsdobem"
+        tweet = "Você sabia?\n" + curiosidade + "\n\n" + self.data_hoje_completa + self.hashtag
+        
+        # verifica se tamanho está ok
+        if self.twitter_api.valida_tamanho_tweet(tweet) != 1:
+            return 0, ""
+        
         return 1, tweet
     
     
@@ -116,4 +112,4 @@ class CuriosidadesClass:
 
         # algo deu errado
         except:
-            print ('Não consegui publicar. Algo está errado.')
+            print ('Não consegui publicar.')

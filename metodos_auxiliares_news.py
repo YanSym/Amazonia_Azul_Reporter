@@ -32,19 +32,10 @@ class HelperClassNews:
         f.close()
 
         # mapeamento de meses
-        self.dict_map_mes = {1: 'janeiro',
-                             2: 'fevereiro',
-                             3: 'março',
-                             4: 'abril',
-                             5: 'maio',
-                             6: 'junho',
-                             7: 'julho',
-                             8: 'agosto',
-                             9: 'setembro',
-                             10: 'outubro',
-                             11: 'novembro',
-                             12: 'dezembro'
-                             }
+        self.dict_map_mes = self.twitter_api.get_map_meses()
+        
+        # hashtag do post
+        self.hashtag = "\n#AmazôniaAzul\n#redebotsdobem"
 
 
     # retorna dia atual
@@ -63,7 +54,7 @@ class HelperClassNews:
         '''
         retorna tweet tratado
         '''
-        return f"{noticia}\n\nLink: {link}\n\n{data}\n#AmazoniaAzul\n#redebotsdobem"
+        return f"{noticia}\n\nLink: {link}\n\n{data}" + self.hashtag
 
     
     # seleciona melhor notícia para tweetar
@@ -73,7 +64,6 @@ class HelperClassNews:
         '''
           
         if (len(df_news) == 0):
-            print ('df vazio')
             return 0, "", ""
         
         # data de hoje
@@ -83,10 +73,12 @@ class HelperClassNews:
             for index in range(len(df_news['Noticia'])):
 
                 # cria o tweet
-                tweet = self.prepara_tweet(df_news.iloc[index]['Noticia'], df_news.iloc[index]['Link'], data_hoje)
+                noticia = df_news.iloc[index]['Noticia']
+                link = df_news.iloc[index]['Link']
+                tweet = self.prepara_tweet(noticia, link, data_hoje)
                 
                 # verifica se tweet está ok
-                if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and len(tweet) <= self.twitter_api.get_max_len_tweet()):
+                if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and self.twitter_api.valida_tamanho_tweet(tweet)):
                     return 1, df_news['Noticia'], tweet
                 
         except:
@@ -96,7 +88,7 @@ class HelperClassNews:
         return 0, "", ""
 
         
-    def posta_tweet_noticia(self, df_news):
+    def posta_tweet_noticia(self):
         '''
         verifica se tweet está ok e publica no Twitter
         '''
@@ -106,6 +98,9 @@ class HelperClassNews:
             print ("Flag 0. Não posso publicar!")
             return
         
+        # pesquisa notícias
+        df_news = self.pesquisa_news()
+
         # seleciona noticia
         flag_tweet_ok, noticia, tweet = self.seleciona_tweet_noticias(df_news)
 

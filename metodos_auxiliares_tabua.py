@@ -3,10 +3,11 @@ import numpy as np
 import requests
 import urllib
 import json
+import time
 from datetime import date
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from twitter_api import Twitter_Class
+from twitter_api import TwitterClass
 
 
 class HelperClassTabua:
@@ -17,6 +18,9 @@ class HelperClassTabua:
         
         # path do chromedriver
         self.path_to_chromedriver = 'chromedriver'
+        
+        # API do Twitter
+        self.twitter_api = TwitterClass()
         
         # parametros do webdriver
         self.chromeOptions = webdriver.ChromeOptions()
@@ -34,6 +38,7 @@ class HelperClassTabua:
         infos = json.load(f)
         self.dict_header = {"User-Agent":infos['header']}
         self.url_tabua_mares = infos['url_tabua_mares']
+        self.tempo_espera_tweet_segundos = int(infos['tempo_espera_tweet_segundos'])
         f.close()
         
         # leitura do arquivo json com os parâmetros
@@ -51,34 +56,36 @@ class HelperClassTabua:
         # df cidades
         self.df_cidades = pd.read_csv(self.path_infos_cidades, encoding='latin-1', sep=';')
 
-        self.lista_colunas_init = ['Cidade', 'Estado', 'Dia', '1_Mare', '2_Mare', '3_Mare', '4_Mare']
+        self.lista_colunas_init = ['Cidade', 'UF', 'Dia', '1_Mare', '2_Mare', '3_Mare', '4_Mare']
         
         # colunas de mares
         self.lista_colunas_finais = ['Cidade',
-                        'Estado',
-                        '1_Mare_Horario',
-                        '1_Mare_Altura',
-                        '2_Mare_Horario',
-                        '2_Mare_Altura',
-                        '3_Mare_Horario',
-                        '3_Mare_Altura',
-                        '4_Mare_Horario',
-                        '4_Mare_Altura']
+                                     'UF',
+                                     '1_Mare_Horario',
+                                     '1_Mare_Altura',
+                                     '2_Mare_Horario',
+                                     '2_Mare_Altura',
+                                     '3_Mare_Horario',
+                                     '3_Mare_Altura',
+                                     '4_Mare_Horario',
+                                     '4_Mare_Altura']
         
         
         # colunas de clima
         self.lista_colunas_df = ['Cidade',
-                            'Estado',
-                            'Tempo',
-                            'Temperatura',
-                            'Temperatura_Max',
-                            'Temperatura_Min',
-                            'Sensacao_Termica',
-                            'Nebulosidade',
-                            'Umidade',
-                            'Vento',
-                            'Pesca',
-                            'Ultra_Violeta']
+                                 'UF',
+                                 'Tempo',
+                                 'Temperatura',
+                                 'Temperatura_Max',
+                                 'Temperatura_Min',
+                                 'Sensacao_Termica',
+                                 'Nebulosidade',
+                                 'Umidade',
+                                 'Vento',
+                                 'Pesca',
+                                 'Ultra_Violeta',
+                                 'Tempo_Prox_Evento',
+                                 'Proximo_Evento']
         
         
         # paths atual
@@ -94,19 +101,27 @@ class HelperClassTabua:
         self.path_pesca_bom = '//*[@id="circulo_estado_grafico_barometro2_1"]'
         self.path_pesca_mau = '//*[@id="circulo_estado_grafico_barometro3_1"]'
         self.path_ultra_violeta = '//*[@id="uv_maximo_img_num"]'
+        self.path_tempo_proximo_evento = '//*[@id="grafico_estados_luna"]/div[1]/div[5]/strong'
+        self.path_proximo_evento = '//*[@id="grafico_estados_luna"]/div[1]/div[6]/strong/em'
         
-
-    # retorna dia atual
-    def get_dia_atual(self):
+        # mapeamento de meses
+        self.dict_map_mes = self.twitter_api.get_map_meses()
+        
         # data de hoje
         dia = date.today().strftime("%d")
         mes = self.dict_map_mes[int(date.today().strftime("%m"))]
         ano = date.today().strftime("%Y")
-        return f"{dia} de {mes} de {ano}"
+        self.data_hoje_completa = f"{dia} de {mes} de {ano}"
+
+        # hashtag do post
+        self.hashtag = "\n#AmazôniaAzul\n#redebotsdobem"
     
     
     # trata elemento removendo caracteres incorretos
     def trata_elemento(self, element):
+        '''
+        Trata elemento, removendo caracteres indesejados
+        '''
         return element.text.replace('\n','')\
                             .replace('\t','')\
                             .replace('\r','')\
@@ -115,6 +130,9 @@ class HelperClassTabua:
     
     
     def gera_resultados_mares_dia(self):
+        '''
+        Gera resultados de marés do dia
+        '''
         
         dia_hoje = int(date.today().strftime("%d"))
         
@@ -126,9 +144,9 @@ class HelperClassTabua:
 
             try:
 
-                cidade = row['cidade']
-                estado = row['estado']
-                valor = row['tabua_mares']
+                cidade = row['Cidade']
+                uf = row['UF']
+                valor = row['Tabua_mares']
 
                 # cria urls
                 url_cidade = f"{self.url_tabua_mares}/{valor}"
@@ -146,7 +164,7 @@ class HelperClassTabua:
                     # insere somente dia de hoje
                     try:
                         if int(cols[0].split(' ')[0]) == dia_hoje:
-                            lista_dados.append([cidade, estado] + [ele for ele in cols if ele])
+                            lista_dados.append([cidade, uf] + [ele for ele in cols if ele])
                     except:
                         continue
 
@@ -167,6 +185,9 @@ class HelperClassTabua:
     
     
     def gera_resultados_climas(self):
+        '''
+        Gera resultados dos climas
+        '''
     
         lista_infos = []
 
@@ -175,9 +196,9 @@ class HelperClassTabua:
 
             try:
 
-                cidade = row['cidade']
-                estado = row['estado']
-                valor = row['tabua_mares']
+                cidade = row['Cidade']
+                uf = row['UF']
+                valor = row['Tabua_mares']
 
                 # cria urls
                 url_dia = f"{self.url_tabua_mares}/{valor}"
@@ -188,14 +209,19 @@ class HelperClassTabua:
 
                 # leitura do conteúdo
                 tempo = driver.find_element_by_xpath(self.path_tempo).text
-                temperatura = driver.find_element_by_xpath(self.path_temperatura).text
-                temperatura_max = driver.find_element_by_xpath(self.path_temperatura_max).text
-                temperatura_min = driver.find_element_by_xpath(self.path_temperatura_min).text
-                sensacao = driver.find_element_by_xpath(self.path_sensacao_termica).text
-                nebulosidade = driver.find_element_by_xpath(self.path_nebulosidade).text
-                umidade = driver.find_element_by_xpath(self.path_umidade).text
-                vento = driver.find_element_by_xpath(self.path_vento).text
-                ultra_violeta = driver.find_element_by_xpath(self.path_ultra_violeta).text
+                temperatura = int(driver.find_element_by_xpath(self.path_temperatura).text)
+                temperatura_max = int(driver.find_element_by_xpath(self.path_temperatura_max).text)
+                temperatura_min = int(driver.find_element_by_xpath(self.path_temperatura_min).text)
+                sensacao = int(driver.find_element_by_xpath(self.path_sensacao_termica).text)
+                nebulosidade = int(driver.find_element_by_xpath(self.path_nebulosidade).text)
+                umidade = int(driver.find_element_by_xpath(self.path_umidade).text)
+                vento = int(driver.find_element_by_xpath(self.path_vento).text)
+                ultra_violeta = int(driver.find_element_by_xpath(self.path_ultra_violeta).text)         
+                tempo_proximo_evento = driver.find_element_by_xpath(self.path_tempo_proximo_evento).text
+                proximo_evento = driver.find_element_by_xpath(self.path_proximo_evento).text
+                    
+                # trata tempo
+                tempo = tempo.replace('Nublado', 'Céu nublado').lower()
 
                 # pesca
                 pesca_muito_bom = driver.find_element_by_xpath(self.path_pesca_muito_bom).get_attribute("class")
@@ -213,13 +239,14 @@ class HelperClassTabua:
                     pesca = ''
 
                 # salva lista
-                lista_infos.append([cidade, estado, tempo,
+                lista_infos.append([cidade, uf, tempo,
                                     temperatura, temperatura_max, temperatura_min,
                                     sensacao, nebulosidade, umidade, vento,
-                                    pesca, ultra_violeta])
+                                    pesca, ultra_violeta,
+                                    tempo_proximo_evento, proximo_evento])
 
             except Exception as e:
-                print (f'erro: {e}')
+                continue
 
         # fecha o driver
         driver.close()
@@ -233,14 +260,131 @@ class HelperClassTabua:
     
     
     def gera_df_tabua_mares(self):
+        '''
+        Junta resultados e aplica pós-processamentos para garantir coerência dos dados
+        '''
         df_tabua_mares = self.gera_resultados_mares_dia()
         df_clima = self.gera_resultados_climas()
         
         # junta resultados
         df_resultado = pd.merge(df_tabua_mares,
                                 df_clima,
-                                on=['Cidade', 'Estado'],
+                                on=['Cidade', 'UF'],
                                 how='inner')
+        
+        # checks de sanidade
+        df_resultado['Temperatura_Max'] = df_resultado[["Temperatura", "Temperatura_Max", "Temperatura_Min"]].max(axis=1)
+        df_resultado['Temperatura_Min'] = df_resultado[["Temperatura", "Temperatura_Max", "Temperatura_Min"]].min(axis=1)
+        
+        # retorna resultados
         return df_resultado
     
     
+    def seleciona_conteudo_publicar(self, df_resultados):
+        '''
+        Seleciona conteúdo para publicar, de acordo com a estratégia implementada
+        '''
+
+        # estratéga de seleção de conteúdo
+        df_selecionados = df_resultados.sample(5)
+        
+        # retorna resultados selecionados
+        return df_selecionados
+    
+    
+    def mapeia_conteudo_estado(self, df_linha):
+        '''
+        Mapeia conteúdo em um estado
+        '''
+        return 1
+    
+    
+    def atribui_template(self, df_linha, estado):
+        '''
+        Retorna template
+        '''
+        
+        # campos
+        cidade = df_linha['Cidade']
+        uf = df_linha['UF']
+        tempo = df_linha['Tempo']
+        temperatura = df_linha['Temperatura']
+        sensacao_termica = df_linha['Sensacao_Termica']
+        temperatura_max = df_linha['Temperatura_Max']
+        temperatura_min = df_linha['Temperatura_Min']
+        nebulosidade = df_linha['Nebulosidade']
+
+        if estado == 1:
+
+            tweet = f'''
+            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA temperatura máxima prevista é de {temperatura_max}°C e a mínima de {temperatura_min}°C.
+            '''
+            
+        else:
+            return 0, ""
+        
+        # adiciona pós-processamento
+        tweet = (tweet + "\n\n" + self.data_hoje_completa + self.hashtag)
+        
+        return 1, tweet
+    
+    
+    def publica_conteudo(self):
+        '''
+        Publica previsão do tempo (tábua de marés)
+        '''
+        
+        # flag de publicação
+        if (self.twitter_api.get_status_twitter() != 1):
+            print ("Flag 0. Não posso publicar!")
+            return
+        
+        try:
+            # gera resultados
+            df_resultados = self.gera_df_tabua_mares()
+
+            # filtra dados para publicação
+            df_selecionados = self.seleciona_conteudo_publicar(df_resultados)
+        
+        except:
+            return
+        
+        if (len(df_selecionados) == 0):
+            return  
+        
+        # tenta publicar tweets
+        try:
+            for index in range(len(df_selecionados)):
+                
+                df_linha = df_selecionados.iloc[index]
+
+                # estado (contexto) do conjunto de dados
+                estado = self.mapeia_conteudo_estado(df_linha)
+                
+                # cria o tweet
+                flag, tweet = self.atribui_template(df_linha, estado)
+                
+                # verifica se pode publicar o tweet
+                if (flag == 0):
+                    print ('tweet não pode ser publicado')
+                    continue
+                    
+                
+                # verifica se tweet está ok
+                if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and self.twitter_api.valida_tamanho_tweet(tweet)):
+                    try:
+                        self.twitter_api.make_tweet(tweet)
+                        print ('Tweet publicado')
+                        
+                        # espera um tempo para publicar novamente
+                        time.sleep(self.tempo_espera_tweet_segundos)
+                        
+                    except Exception as e:
+                        print ('Não consegui publicar.')
+                        print (f"Erro: {e}")
+                        
+                else:
+                    print ('tweet não pode ser publicado')
+                
+        except:
+             return

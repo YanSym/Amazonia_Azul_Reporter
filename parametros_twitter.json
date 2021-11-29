@@ -1,5 +1,5 @@
 {
 "flag_tweet":"1",
-"limite_caracteres":"270",
-"distancia_minima_tweets":"0.1"
+"limite_caracteres":"279",
+"distancia_minima_tweets":"0.05"
 }

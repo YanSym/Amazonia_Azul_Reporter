@@ -6,7 +6,7 @@ import urllib
 import json
 from datetime import date
 from bs4 import BeautifulSoup
-from twitter_api import Twitter_Class
+from twitter_api import TwitterClass
 
 
 class HelperClassNews:
@@ -19,7 +19,7 @@ class HelperClassNews:
         path_json_parametros_news="parametros_news.json"
         
         # API do Twitter
-        self.twitter_api = Twitter_Class()
+        self.twitter_api = TwitterClass()
 
         # leitura do arquivo json com os parâmetros das notícias
         f = open(path_json_parametros_news, "r")
@@ -63,7 +63,7 @@ class HelperClassNews:
         '''
         retorna tweet tratado
         '''
-        return f"{noticia}\n\nLink: {link}\n\n{data}\n#redebotsdobem"
+        return f"{noticia}\n\nLink: {link}\n\n{data}\n#AmazoniaAzul\n#redebotsdobem"
 
     
     # seleciona melhor notícia para tweetar
@@ -103,12 +103,11 @@ class HelperClassNews:
         
         # flag de publicação
         if (self.twitter_api.get_status_twitter() != 1):
-            print ("Flag 1. Não posso publicar!")
+            print ("Flag 0. Não posso publicar!")
             return
         
         # seleciona noticia
         flag_tweet_ok, noticia, tweet = self.seleciona_tweet_noticias(df_news)
-        print (flag_tweet_ok)
 
         # verifica se tweet está ok
         if (flag_tweet_ok):

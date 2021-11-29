@@ -4,7 +4,7 @@ import pandas as pd
 import tweepy
 import json
 
-class Twitter_Class:
+class TwitterClass:
     """
     Classe API do Twitter
     """
@@ -117,7 +117,7 @@ class Twitter_Class:
         
         # verifica se conteúdo já foi postado
         for tweet_publicado in lista_tweets_publicados[:100]:
-            distancia = Twitter_Class.calcula_distancia_strings(tweet, tweet_publicado)
+            distancia = TwitterClass.calcula_distancia_strings(tweet, tweet_publicado)
             if (distancia < self.distancia_minima_tweets):
                 return 0
         

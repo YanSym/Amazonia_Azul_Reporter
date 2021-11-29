@@ -205,9 +205,9 @@ class HelperClassTabua:
                 # trata pesca
                 if pesca_muito_bom == 'circulo_estado_grafico_barometro1 circulo_estado_grafico_barometro1_activo':
                     pesca = 'Muito Bom'
-                elif pesca_bom == 'circulo_estado_grafico_barometro2 circulo_estado_grafico_barometro2_activo':
+                elif pesca_bom == 'circulo_estado_grafico_barometro1 circulo_estado_grafico_barometro1_activo':
                     pesca = 'Bom'
-                elif pesca_mau == 'circulo_estado_grafico_barometro2 circulo_estado_grafico_barometro3_activo':
+                elif pesca_mau == 'circulo_estado_grafico_barometro1 circulo_estado_grafico_barometro1_activo':
                     pesca = 'Mau'
                 else:
                     pesca = ''

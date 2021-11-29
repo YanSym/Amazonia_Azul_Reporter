@@ -17,8 +17,9 @@ class HelperClassNews:
         
         # arquivos auxiliares
         path_json_parametros_news="parametros_news.json"
-        path_json_parametros_twitter="parametros_twitter.json"
-        self.path_noticias_bd="noticias_bd.csv"
+        
+        # API do Twitter
+        self.twitter_api = Twitter_Class()
 
         # leitura do arquivo json com os parâmetros das notícias
         f = open(path_json_parametros_news, "r")
@@ -29,28 +30,21 @@ class HelperClassNews:
         self.max_news_check = int(infos['max_news_check'])
         self.url_tinyurl = infos['url_tinyurl']
         f.close()
-        
-        # leitura do arquivo json com os parâmetros
-        f = open(path_json_parametros_twitter, "r")
-        infos = json.load(f)
-        self.limite_caracteres = int(infos['limite_caracteres'])
-        self.flag_tweet = int(infos["flag_tweet"])
-        f.close()
 
         # mapeamento de meses
         self.dict_map_mes = {1: 'janeiro',
-               2: 'fevereiro',
-               3: 'março',
-               4: 'abril',
-               5: 'maio',
-               6: 'junho',
-               7: 'julho',
-               8: 'agosto',
-               9: 'setembro',
-               10: 'outubro',
-               11: 'novembro',
-               12: 'dezembro'
-               }
+                             2: 'fevereiro',
+                             3: 'março',
+                             4: 'abril',
+                             5: 'maio',
+                             6: 'junho',
+                             7: 'julho',
+                             8: 'agosto',
+                             9: 'setembro',
+                             10: 'outubro',
+                             11: 'novembro',
+                             12: 'dezembro'
+                             }
 
 
     # retorna dia atual
@@ -69,7 +63,7 @@ class HelperClassNews:
         '''
         retorna tweet tratado
         '''
-        return f"{noticia}\nLink: {link}\n\n{data}\n#redebotsdobem"
+        return f"{noticia}\n\nLink: {link}\n\n{data}\n#redebotsdobem"
 
     
     # seleciona melhor notícia para tweetar
@@ -77,68 +71,56 @@ class HelperClassNews:
         '''
         selecionador de melhor notícia
         '''
-        # csv de noticias
-        lista_news_publicadas = pd.read_csv(self.path_noticias_bd, sep=';')['Noticia'].values.tolist()
-
-        # filtra noticias que ainda não foram publicadas
-        df_news = df_news.loc[~df_news['Noticia'].isin(lista_news_publicadas)]
-        
+          
         if (len(df_news) == 0):
             print ('df vazio')
-            return 0, "", "" 
-
-        # primeira linha das notícias
-        try:
-            df_tweet = df_news.sample(1).iloc[0]
-        except:
             return 0, "", ""
-
+        
         # data de hoje
         data_hoje = self.get_dia_atual()
+        
+        try:
+            for index in range(len(df_news['Noticia'])):
 
-        # cria o tweet
-        tweet = self.prepara_tweet(df_tweet['Noticia'], df_tweet['Link'], data_hoje)
-
-        # verifica se tweet está ok
-        if (Twitter_Class.verifica_tweet_ok(tweet) and len(tweet) <= self.limite_caracteres):
-            return 1, df_tweet['Noticia'], tweet
-        else:
-            return 0, "", ""
-    
-    def adiciona_noticia_bd(self, noticia):
-        '''
-        adiciona notícia ao bd
-        '''
-        df_noticias = pd.read_csv(self.path_noticias_bd, sep=';')
-        df_noticias.loc[-1] = [noticia, date.today().strftime("%d/%m/%Y")]
-        df_noticias.index = df_noticias.index + 1
-        df_noticias = df_noticias.sort_index().iloc[:10_000]
-        df_noticias.to_csv(self.path_noticias_bd, index=False, sep=';')
+                # cria o tweet
+                tweet = self.prepara_tweet(df_news.iloc[index]['Noticia'], df_news.iloc[index]['Link'], data_hoje)
+                
+                # verifica se tweet está ok
+                if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and len(tweet) <= self.twitter_api.get_max_len_tweet()):
+                    return 1, df_news['Noticia'], tweet
+                
+        except:
+             return 0, "", ""
+        
+        # se nada deu certo..
+        return 0, "", ""
 
         
     def posta_tweet_noticia(self, df_news):
         '''
         verifica se tweet está ok e publica no Twitter
         '''
-        flag_tweet_ok, noticia, tweet = self.seleciona_tweet_noticias(df_news)
         
-        if (self.flag_tweet != 1):
+        # flag de publicação
+        if (self.twitter_api.get_status_twitter() != 1):
             print ("Flag 1. Não posso publicar!")
             return
+        
+        # seleciona noticia
+        flag_tweet_ok, noticia, tweet = self.seleciona_tweet_noticias(df_news)
+        print (flag_tweet_ok)
 
         # verifica se tweet está ok
         if (flag_tweet_ok):
             try:
-                twitter_api = Twitter_Class()
-                self.adiciona_noticia_bd(noticia)
-                twitter_api.make_tweet(tweet)
+                self.twitter_api.make_tweet(tweet)
                 print ('Tweet publicado!')
             except Exception as e:
                 print ('Não consegui publicar.')
                 print (f"Erro: {e}")
 
         else:
-            print ('Não consegui publicar. Algo errado no tweet.')
+            print ('Não consegui publicar. Algo está errado.')
 
                 
     def gera_url_tinyurl(self, url_long):

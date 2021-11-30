@@ -56,37 +56,6 @@ class HelperClassNews:
         '''
         return f"{noticia}\n\nLink: {link}\n\n{data}" + self.hashtag
 
-    
-    # seleciona melhor notícia para tweetar
-    def seleciona_tweet_noticias(self, df_news):
-        '''
-        selecionador de melhor notícia
-        '''
-          
-        if (len(df_news) == 0):
-            return 0, "", ""
-        
-        # data de hoje
-        data_hoje = self.get_dia_atual()
-        
-        try:
-            for index in range(len(df_news['Noticia'])):
-
-                # cria o tweet
-                noticia = df_news.iloc[index]['Noticia']
-                link = df_news.iloc[index]['Link']
-                tweet = self.prepara_tweet(noticia, link, data_hoje)
-                
-                # verifica se tweet está ok
-                if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and self.twitter_api.valida_tamanho_tweet(tweet)):
-                    return 1, df_news['Noticia'], tweet
-                
-        except:
-             return 0, "", ""
-        
-        # se nada deu certo..
-        return 0, "", ""
-
         
     def posta_tweet_noticia(self):
         '''
@@ -101,20 +70,33 @@ class HelperClassNews:
         # pesquisa notícias
         df_news = self.pesquisa_news()
 
-        # seleciona noticia
-        flag_tweet_ok, noticia, tweet = self.seleciona_tweet_noticias(df_news)
+        if (len(df_news) == 0):
+            return
+        
+        # data de hoje
+        data_hoje = self.get_dia_atual()
+        
+        for index in range(len(df_news['Noticia'])):
 
-        # verifica se tweet está ok
-        if (flag_tweet_ok):
             try:
-                self.twitter_api.make_tweet(tweet)
-                print ('Tweet publicado!')
-            except Exception as e:
-                print ('Não consegui publicar.')
-                print (f"Erro: {e}")
+                # cria o tweet
+                noticia = df_news.iloc[index]['Noticia']
+                link = df_news.iloc[index]['Link']
+                tweet = self.prepara_tweet(noticia, link, data_hoje)
 
-        else:
-            print ('Não consegui publicar. Algo está errado.')
+                # verifica se tweet está ok
+                if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and self.twitter_api.valida_tamanho_tweet(tweet)):
+
+                    self.twitter_api.make_tweet(tweet)
+                    print ('Tweet publicado!')
+                    return
+
+            # erro
+            except Exception as e:
+                continue
+
+        # não conseguiu publicar
+        print ('Não consegui publicar. Algo está errado.')
 
                 
     def gera_url_tinyurl(self, url_long):

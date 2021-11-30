@@ -102,6 +102,8 @@ class CuriosidadesClass:
         # seleciona curiosidade para publicar
         flag, tweet = self.prepara_tweet()
         
+        print (tweet)
+        
         # tweet deu errado
         if flag == 0:
             return

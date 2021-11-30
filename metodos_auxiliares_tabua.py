@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import requests
+import random
 import urllib
 import json
 import time
@@ -296,7 +297,15 @@ class HelperClassTabua:
         '''
         Mapeia conteúdo em um estado
         '''
-        return 1
+        ultra_violeta = df_linha['Ultra_Violeta']
+        
+        # índice ultra violeta máximo
+        if ultra_violeta == 11:
+            return 1
+        
+        # índice ultra violeta
+        else:
+            return 2
     
     
     def atribui_template(self, df_linha, estado):
@@ -313,12 +322,41 @@ class HelperClassTabua:
         temperatura_max = df_linha['Temperatura_Max']
         temperatura_min = df_linha['Temperatura_Min']
         nebulosidade = df_linha['Nebulosidade']
+        ultra_violeta = df_linha['Ultra_Violeta']
+        vento = df_linha['Vento']
 
+        # Ultra Violeta
         if estado == 1:
 
-            tweet = f'''
+            possibilidade_1 = f'''
             Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA temperatura máxima prevista é de {temperatura_max}°C e a mínima de {temperatura_min}°C.
             '''
+            
+            possibilidade_2 = f'''
+            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nO índice ultravioleta ({ultra_violeta}) hoje está elevado ({ultra_violeta}). Utilize protetor solar, camiseta e óculos de sol!
+            '''
+            
+            possibilidade_3 = f'''
+            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nO índice ultravioleta ({ultra_violeta}) hoje está elevado ({ultra_violeta}). Fique à sombra durante as horas centrais do dia!
+            '''
+            
+            lista_possibilidades = [possibilidade_1, possibilidade_2, possibilidade_3]
+            tweet = random.choice(lista_possibilidades)
+        
+        
+        # Não Ultra Violeta  
+        elif estado == 2:
+            
+            possibilidade_1 = f'''
+            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA temperatura máxima prevista é de {temperatura_max}°C e a mínima de {temperatura_min}°C.
+            '''
+            
+            possibilidade_2 = f'''
+            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA nebulosidade é de {nebulosidade}% e a velocidade do vento é de {vento} km/h.
+            '''
+            
+            lista_possibilidades = [possibilidade_1, possibilidade_2]
+            tweet = random.choice(lista_possibilidades)
             
         else:
             return 0, ""

@@ -1,4 +1,4 @@
-from modulo_curiosidades import CuriosidadesClass
+from metodos_auxiliares_curiosidades import CuriosidadesClass
 
 # instancia o objeto
 objeto_curiosidades = CuriosidadesClass()

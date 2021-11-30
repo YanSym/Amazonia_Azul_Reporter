@@ -54,7 +54,7 @@ class HelperClassNews:
         '''
         retorna tweet tratado
         '''
-        return f"{noticia}\n\nLink: {link}\n\n{data}" + self.hashtag
+        return f"{noticia}\n\nFonte: {link}\n\n{data}" + self.hashtag
 
         
     def posta_tweet_noticia(self):

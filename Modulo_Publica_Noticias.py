@@ -1,7 +1,7 @@
 from metodos_auxiliares_news import HelperClassNews
 
-# classe auxiliar
-objeto_noticias = HelperClassNews()
+# instancia o objeto
+objeto_publicacao = HelperClassNews()
       
-# seleciona e posta tweet mais relevante
-objeto_noticias.posta_tweet_noticia()
+# publicação
+objeto_publicacao.publica_conteudo()

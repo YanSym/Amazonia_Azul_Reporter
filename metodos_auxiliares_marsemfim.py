@@ -5,29 +5,35 @@ import sys
 import urllib
 import json
 from datetime import date
-from bs4 import BeautifulSoup
+from selenium import webdriver
 from twitter_api import TwitterClass
 
 
-class HelperClassNews:
+class HelperClassMarsemfim:
     """
     Classe de métodos auxiliares
     """
     def __init__(self):
         
         # arquivos auxiliares
-        path_json_parametros_news="parametros_news.json"
+        path_json_parametros="parametros_marsemfim.json"
+        
+         # path do chromedriver
+        self.path_to_chromedriver = 'chromedriver'
         
         # API do Twitter
         self.twitter_api = TwitterClass()
+        
+        # parametros do webdriver
+        self.chromeOptions = webdriver.ChromeOptions()
+        self.chromeOptions.add_argument('--no-sandbox')
+        self.chromeOptions.add_argument("--headless")
 
         # leitura do arquivo json com os parâmetros das notícias
-        f = open(path_json_parametros_news, "r")
+        f = open(path_json_parametros, "r")
         infos = json.load(f)
         self.dict_header = {"User-Agent":infos['header']}
-        self.url_google_news = infos['url_google_news']
-        self.lista_pesquisas = infos['lista_pesquisas']
-        self.max_news_check = int(infos['max_news_check'])
+        self.url = infos['url']
         self.url_tinyurl = infos['url_tinyurl']
         f.close()
 
@@ -55,7 +61,7 @@ class HelperClassNews:
         '''
         retorna tweet tratado
         '''
-        return f"{noticia}\n\nFonte: {link}\n\n{data}" + self.hashtag
+        return f"{self.twitter_api.dict_map_emoji['robo']} {noticia}\n\nFonte: {link}\n\n{data}" + self.hashtag
 
                 
     def gera_url_tinyurl(self, url_long):
@@ -68,61 +74,40 @@ class HelperClassNews:
             return 1, res.text
         except Exception as e:
             return 0, ''
-    
-    
-    def gera_url_google_news(self, url):
-        '''
-        Gera url google news
-        '''
-        return (self.url_google_news + '/search?q=' + url.replace(" ", "+") + "&hl=pt-BR")
         
       
-    def pesquisa_news(self):
+    def pesquisa_noticias(self):
         '''
-        pesquisa notícias
+        publica conteudo
         '''
          
         lista_news = []
+        
+        # entra na url
+        driver = webdriver.Chrome(self.path_to_chromedriver, options=self.chromeOptions)
+        driver.get(self.url)
+        
+        elemento_pesquisa = '//h3[contains(@class, "entry-title td-module-title")]/a'
+        lista_elementos = driver.find_elements_by_xpath(elemento_pesquisa)[:3]
                 
-        for pesquisa in self.lista_pesquisas:
-            pesquisa = self.gera_url_google_news(pesquisa)
-            response = requests.get(pesquisa, headers=self.dict_header)
-            soup = BeautifulSoup(response.text, 'html.parser')
-
-            for index, result in enumerate(soup.select('.xrnccd')):
-
-                # interrompe execução
-                if index >= self.max_news_check:
-                    break
-
-                # data da publicação
-                data = result.find("time", {"class": "WW6dff uQIVzc Sksgp"}).text
-                if ('hora' not in data.lower() and 'ontem' not in data.lower()):
+        for elemento in lista_elementos:
+            texto = elemento.text
+            link = elemento.get_attribute("href")
+            
+            # tenta gerar tinyurl
+            try:
+                status, url_short = self.gera_url_tinyurl(link)
+                if (status != 1):
                     continue
-                    
-                # noticia
-                noticia = (result.h3.a.text)
-                
-                # link
-                link = "https://news.google.com" + result.h3.a['href'][1:]
-                url_long = requests.get(link).url
+            except Exception as e:
+                continue
 
-                # tenta gerar tinyurl
-                try:
-                    status, url_short = self.gera_url_tinyurl(url_long)
-                    if (status != 1):
-                        continue 
-                except Exception as e:
-                    continue
+            # coloca noticia e link na lista
+            lista_news.append([texto, url_short])
 
-                # coloca noticia e link na lista
-                lista_news.append([noticia, url_short])
-
-        return pd.DataFrame(lista_news, columns=['Noticia', 'Link'])
+        return lista_news
     
     
-    
-         
     def publica_conteudo(self):
         '''
         verifica se tweet está ok e publica no Twitter
@@ -134,20 +119,20 @@ class HelperClassNews:
             return
         
         # pesquisa notícias
-        df_news = self.pesquisa_news()
+        lista_news = self.pesquisa_noticias()
 
-        if (len(df_news) == 0):
+        if (len(lista_news) == 0):
             return
         
         # data de hoje
         data_hoje = self.get_dia_atual()
         
-        for index in range(len(df_news['Noticia'])):
+        for elemento in lista_news:
 
             try:
                 # cria o tweet
-                noticia = df_news.iloc[index]['Noticia']
-                link = df_news.iloc[index]['Link']
+                noticia = elemento[0]
+                link = elemento[1]
                 tweet = self.prepara_tweet(noticia, link, data_hoje)
 
                 # verifica se tweet está ok

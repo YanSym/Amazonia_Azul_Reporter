@@ -31,7 +31,6 @@ class HelperClassTabua:
         # arquivos auxiliares
         self.path_json_parametros_tabua="parametros_tabua_mares.json"
         self.path_json_parametros_twitter="parametros_twitter.json"
-        self.path_palavras_banidas="lista_palavras_banidas.txt"
         self.path_infos_cidades='infos_cidades.csv'
         
         # leitura do arquivo json com os parâmetros das notícias
@@ -47,11 +46,6 @@ class HelperClassTabua:
         infos = json.load(f)
         self.limite_caracteres = int(infos['limite_caracteres'])
         self.flag_tweet = int(infos["flag_tweet"])
-        f.close()
-
-        # Leitura das palavras banidas
-        f = open(self.path_palavras_banidas, "r")
-        self.lista_palavras_banidas = f.read().split('\n')
         f.close()
         
         # df cidades
@@ -115,7 +109,8 @@ class HelperClassTabua:
         self.data_hoje_completa = f"{dia} de {mes} de {ano}"
 
         # hashtag do post
-        self.hashtag = "\n#AmazôniaAzul\n#redebotsdobem"
+        self.hashtag = f"\n#AmazôniaAzul {self.twitter_api.dict_map_emoji['oceano']}"\
+        +f"\n#redebotsdobem {self.twitter_api.dict_map_emoji['satelite']}"
     
     
     # trata elemento removendo caracteres incorretos
@@ -128,6 +123,16 @@ class HelperClassTabua:
                             .replace('\r','')\
                             .replace('m', '')\
                             .strip()
+    
+    
+    def get_inicio_texto(self, cidade):
+        '''
+        Retorna início do texto para publicação
+        '''
+        if cidade in ['Rio de Janeiro']:
+            return 'No'
+        else:
+            return 'Em'
     
     
     def gera_resultados_mares_dia(self):
@@ -297,23 +302,29 @@ class HelperClassTabua:
         '''
         Mapeia conteúdo em um estado
         '''
+        lista_estados = []
+        
         ultra_violeta = df_linha['Ultra_Violeta']
         
         # índice ultra violeta máximo
         if ultra_violeta == 11:
-            return 1
+            lista_estados.append(1)
         
         # índice ultra violeta
         else:
-            return 2
-    
+            lista_estados.append(2)
+        
+        # sorteia um dos elementos da lista
+        estado = random.choice(lista_estados)
+        return estado
+        
     
     def atribui_template(self, df_linha, estado):
         '''
         Retorna template
         '''
         
-        # campos
+        # campos principais
         cidade = df_linha['Cidade']
         uf = df_linha['UF']
         tempo = df_linha['Tempo']
@@ -324,22 +335,34 @@ class HelperClassTabua:
         nebulosidade = df_linha['Nebulosidade']
         ultra_violeta = df_linha['Ultra_Violeta']
         vento = df_linha['Vento']
-
+        
+        # marés
+        primeira_Mare_Horario = df_linha['1_Mare_Horario']
+        primeira_Mare_Altura = df_linha['1_Mare_Altura']
+        segunda_Mare_Horario = df_linha['2_Mare_Horario']
+        segunda_Mare_Altura = df_linha['2_Mare_Altura']
+        terceira_Mare_Horario = df_linha['3_Mare_Horario']
+        terceira_Mare_Altura = df_linha['3_Mare_Altura']
+        quarta_Mare_Horario = df_linha['4_Mare_Horario']
+        quarta_Mare_Altura = df_linha['4_Mare_Altura']
+        
+        # início do texto
+        inicio_texto = self.get_inicio_texto(cidade)            
+         
+        
         # Ultra Violeta
         if estado == 1:
 
-            possibilidade_1 = f'''
-            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA temperatura máxima prevista é de {temperatura_max}°C e a mínima de {temperatura_min}°C.
+            possibilidade_1 = f'''{inicio_texto} {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA temperatura máxima prevista é de {temperatura_max}°C e a mínima de {temperatura_min}°C.\nUtilize protetor solar durante o dia!
             '''
             
-            possibilidade_2 = f'''
-            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nO índice ultravioleta ({ultra_violeta}) hoje está elevado ({ultra_violeta}). Utilize protetor solar, camiseta e óculos de sol!
+            possibilidade_2 = f'''{inicio_texto} {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nO índice ultravioleta hoje está elevado ({ultra_violeta})! Utilize protetor solar, camiseta e óculos de sol.
             '''
             
-            possibilidade_3 = f'''
-            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nO índice ultravioleta ({ultra_violeta}) hoje está elevado ({ultra_violeta}). Fique à sombra durante as horas centrais do dia!
+            possibilidade_3 = f'''{inicio_texto} {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nO índice ultravioleta hoje está elevado ({ultra_violeta})! Fique à sombra durante as horas centrais do dia.
             '''
             
+            # lista de possibilidades para escolher
             lista_possibilidades = [possibilidade_1, possibilidade_2, possibilidade_3]
             tweet = random.choice(lista_possibilidades)
         
@@ -347,22 +370,24 @@ class HelperClassTabua:
         # Não Ultra Violeta  
         elif estado == 2:
             
-            possibilidade_1 = f'''
-            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA temperatura máxima prevista é de {temperatura_max}°C e a mínima de {temperatura_min}°C.
+            possibilidade_1 = f'''{inicio_texto} {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA temperatura máxima prevista é de {temperatura_max}°C e a mínima de {temperatura_min}°C.
             '''
             
-            possibilidade_2 = f'''
-            Em {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA nebulosidade é de {nebulosidade}% e a velocidade do vento é de {vento} km/h.
+            possibilidade_2 = f'''{inicio_texto} {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\nA nebulosidade é de {nebulosidade}% e a velocidade do vento é de {vento} km/h.
             '''
             
-            lista_possibilidades = [possibilidade_1, possibilidade_2]
+            possibilidade_3 = f'''{inicio_texto} {cidade} ({uf}) a previsão do tempo é de {tempo}, com uma temperatura de {temperatura}°C e sensação térmica de {sensacao_termica}°C.\n\nMaré alta: {primeira_Mare_Horario} ({primeira_Mare_Altura}m) e {terceira_Mare_Horario} ({terceira_Mare_Altura}m).\nMaré baixa: {segunda_Mare_Horario} ({segunda_Mare_Altura}m) e {quarta_Mare_Horario} ({quarta_Mare_Altura}m).
+            '''
+            
+            # lista de possibilidades para escolher
+            lista_possibilidades = [possibilidade_1, possibilidade_2, possibilidade_3]
             tweet = random.choice(lista_possibilidades)
             
         else:
             return 0, ""
         
-        # adiciona pós-processamento
-        tweet = (tweet + "\n\n" + self.data_hoje_completa + self.hashtag)
+        # adiciona pós-processamentos ao tweet
+        tweet = f"{self.twitter_api.dict_map_emoji['robo']} {tweet}\n\n{self.data_hoje_completa}{self.hashtag}"
         
         return 1, tweet
     

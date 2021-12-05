@@ -1,7 +1,7 @@
 from metodos_auxiliares_tabua import HelperClassTabua
 
 # classe auxiliar
-helper_class = HelperClassTabua()
+objeto_publicacao = HelperClassTabua()
 
 # gera resultados
-helper_class.publica_conteudo()
+objeto_publicacao.publica_conteudo()

@@ -40,7 +40,8 @@ class CuriosidadesClass:
         self.data_hoje_completa = f"{dia} de {mes} de {ano}"
         
         # hashtag do post
-        self.hashtag = "\n#AmazôniaAzul\n#redebotsdobem"
+        self.hashtag = f"\n#AmazôniaAzul {self.twitter_api.dict_map_emoji['oceano']}"\
+        +f"\n#redebotsdobem {self.twitter_api.dict_map_emoji['satelite']}"
         
         
     def check_dia_publicar(self):
@@ -85,7 +86,7 @@ class CuriosidadesClass:
         return 1, tweet
     
     
-    def publica_curiosidade(self):
+    def publica_conteudo(self):
         '''
         Tenta publicar curiosidade
         '''
@@ -102,8 +103,6 @@ class CuriosidadesClass:
         # seleciona curiosidade para publicar
         flag, tweet = self.prepara_tweet()
         
-        print (tweet)
-        
         # tweet deu errado
         if flag == 0:
             return
@@ -111,6 +110,7 @@ class CuriosidadesClass:
         # tenta publicar 
         try:
             self.twitter_api.make_tweet(tweet)
+            print ('Tweet publicado!')
 
         # algo deu errado
         except:

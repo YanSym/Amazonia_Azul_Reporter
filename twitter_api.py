@@ -69,6 +69,19 @@ class TwitterClass:
                              11: 'novembro',
                              12: 'dezembro'
                              }
+        
+        
+        self.dict_map_emoji = {'peixe':'\U0001F41F',
+                               'oceano':'\U0001F305',
+                               'robo':'\U0001F916',
+                               'surf':'\U0001F3C4',
+                               'sol':'\U0001F324',
+                               'chuva':'\U0001F327',
+                               'chuva_sol':'\U0001F326',
+                               'chuva_relampago':'\U000126C8',
+                               'relampago':'\U00011F329',
+                               'satelite':'\U0001F6F0'
+                               }
     
     
     @staticmethod

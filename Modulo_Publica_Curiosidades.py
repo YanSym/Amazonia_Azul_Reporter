@@ -1,7 +1,7 @@
 from metodos_auxiliares_curiosidades import CuriosidadesClass
 
 # instancia o objeto
-objeto_curiosidades = CuriosidadesClass()
+objeto_publicacao = CuriosidadesClass()
 
-# publica curiosidade
-objeto_curiosidades.publica_curiosidade()
+# publicação
+objeto_publicacao.publica_conteudo()

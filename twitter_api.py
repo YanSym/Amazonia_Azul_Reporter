@@ -54,38 +54,34 @@ class TwitterClass:
         except:
             print("Erro de autenticação!")
             self.api = ''
-            
-
-        self.dict_map_mes = {1: 'janeiro',
-                             2: 'fevereiro',
-                             3: 'março',
-                             4: 'abril',
-                             5: 'maio',
-                             6: 'junho',
-                             7: 'julho',
-                             8: 'agosto',
-                             9: 'setembro',
-                             10: 'outubro',
-                             11: 'novembro',
-                             12: 'dezembro'
-                             }
         
         
-        self.dict_map_emoji = {'peixe':'\U0001F41F',
+        self.dict_map_emoji = {'pesca':'\U0001F3A3',
+                               'peixe':'\U0001F41F',
                                'oceano':'\U0001F305',
                                'robo':'\U0001F916',
                                'surf':'\U0001F3C4',
                                'sol':'\U0001F324',
+                               'sol_face':'\U0001F31E',
                                'chuva':'\U0001F327',
                                'chuva_sol':'\U0001F326',
                                'chuva_relampago':'\U000126C8',
                                'relampago':'\U00011F329',
-                               'satelite':'\U0001F6F0'
+                               'satelite':'\U0001F6F0',
+                               'oculos_sol':"\U0001F60E",
+                               'sombra':'\U0001F3D6',
+                               'vento':'\U0001F32A'
                                }
+        
+        # inicio do post
+        self.inicio_post = f"{self.dict_map_emoji['robo']} "
+        
+        # fim do post
+        self.fim_post = f"\n\n\n#AmazôniaAzul {self.dict_map_emoji['oceano']}"\
+        +f"\n#redebotsdobem {self.dict_map_emoji['satelite']}"
     
     
-    @staticmethod
-    def calcula_distancia_strings(string1, string2):
+    def calcula_distancia_strings(self, string1, string2):
         '''
         Retorna distância entre strings
         '''
@@ -93,12 +89,26 @@ class TwitterClass:
     
     
     def valida_tamanho_tweet(self, tweet):
+        '''
+        valida tamanho do tweet
+        retorna True caso menor e False caso maior que o limite de caracteres
+        '''
         flag = (len(tweet) <= self.limite_caracteres)
         return flag
     
     
-    def get_map_meses(self):
-        return self.dict_map_mes
+    def get_inicio_post(self):
+        '''
+        retorna fim do post
+        '''
+        return self.inicio_post
+    
+    
+    def get_fim_post(self):
+        '''
+        retorna fim do post
+        '''
+        return self.fim_post
     
 
     def get_status_twitter(self):
@@ -147,7 +157,7 @@ class TwitterClass:
         
         # verifica se conteúdo já foi postado
         for tweet_publicado in lista_tweets_publicados[:100]:
-            distancia = TwitterClass.calcula_distancia_strings(tweet, tweet_publicado)
+            distancia = self.calcula_distancia_strings(tweet, tweet_publicado)
             if (distancia < self.distancia_minima_tweets):
                 print (f'Distancia pequena de {distancia}. Tweet vetado, muito similar.')
                 return 0

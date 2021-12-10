@@ -20,54 +20,25 @@ class HelperClassNews:
         
         # API do Twitter
         self.twitter_api = TwitterClass()
-
+        
+        # parâmetros globais
+        self.dict_header = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"}
+        self.url_google_news = "https://news.google.com"
+    
         # leitura do arquivo json com os parâmetros das notícias
         f = open(path_json_parametros_news, "r")
         infos = json.load(f)
-        self.dict_header = {"User-Agent":infos['header']}
-        self.url_google_news = infos['url_google_news']
         self.lista_pesquisas = infos['lista_pesquisas']
         self.max_news_check = int(infos['max_news_check'])
-        self.url_tinyurl = infos['url_tinyurl']
         f.close()
-
-        # mapeamento de meses
-        self.dict_map_mes = self.twitter_api.get_map_meses()
-        
-        # hashtag do post
-        self.hashtag = f"\n#AmazôniaAzul {self.twitter_api.dict_map_emoji['oceano']}"\
-        +f"\n#redebotsdobem {self.twitter_api.dict_map_emoji['satelite']}"
-
-
-    # retorna dia atual
-    def get_dia_atual(self):
-        '''
-        retorna dia atual em portugês
-        '''
-        # data de hoje
-        dia = date.today().strftime("%d")
-        mes = self.dict_map_mes[int(date.today().strftime("%m"))]
-        ano = date.today().strftime("%Y")
-        return f"{dia} de {mes} de {ano}"
     
     
-    def prepara_tweet(self, noticia, link, data):
+    def prepara_tweet(self, noticia, link):
         '''
         retorna tweet tratado
         '''
-        return f"{noticia}\n\nFonte: {link}\n\n{data}" + self.hashtag
-
-                
-    def gera_url_tinyurl(self, url_long):
-        '''
-        Transforma URL longa em URL curta (tinyurl)
-        '''
-        try:
-            url = self.url_tinyurl + "?" + urllib.parse.urlencode({"url": url_long})
-            res = requests.get(url)
-            return 1, res.text
-        except Exception as e:
-            return 0, ''
+        
+        return f"{self.twitter_api.get_inicio_post()}{noticia}\n\nFonte: {link}{self.twitter_api.get_fim_post()}"
     
     
     def gera_url_google_news(self, url):
@@ -107,19 +78,10 @@ class HelperClassNews:
                 link = "https://news.google.com" + result.h3.a['href'][1:]
                 url_long = requests.get(link).url
 
-                # tenta gerar tinyurl
-                try:
-                    status, url_short = self.gera_url_tinyurl(url_long)
-                    if (status != 1):
-                        continue 
-                except Exception as e:
-                    continue
-
                 # coloca noticia e link na lista
-                lista_news.append([noticia, url_short])
+                lista_news.append([noticia, url_long])
 
         return pd.DataFrame(lista_news, columns=['Noticia', 'Link'])
-    
     
     
          
@@ -139,16 +101,14 @@ class HelperClassNews:
         if (len(df_news) == 0):
             return
         
-        # data de hoje
-        data_hoje = self.get_dia_atual()
-        
+        # itera lista de noticias
         for index in range(len(df_news['Noticia'])):
 
             try:
                 # cria o tweet
                 noticia = df_news.iloc[index]['Noticia']
                 link = df_news.iloc[index]['Link']
-                tweet = self.prepara_tweet(noticia, link, data_hoje)
+                tweet = self.prepara_tweet(noticia, link)
 
                 # verifica se tweet está ok
                 if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and self.twitter_api.valida_tamanho_tweet(tweet)):

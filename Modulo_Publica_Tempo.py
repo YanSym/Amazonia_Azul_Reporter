@@ -1,7 +1,7 @@
-from metodos_auxiliares_tabua import HelperClassTabua
+from metodos_auxiliares_tempo import HelperClassTempo
 
 # classe auxiliar
-objeto_publicacao = HelperClassTabua()
+objeto_publicacao = HelperClassTempo()
 
 # gera resultados
 objeto_publicacao.publica_conteudo()

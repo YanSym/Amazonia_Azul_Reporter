@@ -1,7 +1,5 @@
 {
-"header":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582",
-"url_google_news":"https://news.google.com",
-"lista_pesquisas":["Amazonia Azul", "Mancha Oceano", "Desastre Ambiental", "Aquecimento Global", "Clima Brasil", "Tempestade Brasil"],
-"max_news_check":"3",
-"url_tinyurl":"http://tinyurl.com/api-create.php"
+"lista_pesquisas":["Amazonia Azul", "Mancha Oceano", "Desastre Ambiental", "Porto de Santos",
+                   "Aquecimento Global", "Clima Brasil", "Tempestade Brasil"],
+"max_news_check":"3"
 }

@@ -17,42 +17,10 @@ class CuriosidadesClass:
         
         # API do Twitter
         self.twitter_api = TwitterClass()
-
-        # leitura do arquivo json com os parâmetros das notícias
-        f = open(path_json_parametros_curiosidades, "r")
-        infos = json.load(f)
-        self.lista_dias = [int(dia) for dia in infos['lista_dias']]
-        f.close()
-        
-        # dia de hoje
-        self.dia_hoje = int(date.today().strftime("%d"))
         
         # curiosidades
-        self.lista_curiosidades = pd.read_csv("curiosidades.csv", sep=';', encoding='latin1')['Curiosidade']
-        
-        # mapeamento de meses
-        self.dict_map_mes = self.twitter_api.get_map_meses()
-        
-        # data de hoje
-        dia = date.today().strftime("%d")
-        mes = self.dict_map_mes[int(date.today().strftime("%m"))]
-        ano = date.today().strftime("%Y")
-        self.data_hoje_completa = f"{dia} de {mes} de {ano}"
-        
-        # hashtag do post
-        self.hashtag = f"\n#AmazôniaAzul {self.twitter_api.dict_map_emoji['oceano']}"\
-        +f"\n#redebotsdobem {self.twitter_api.dict_map_emoji['satelite']}"
-        
-        
-    def check_dia_publicar(self):
-        '''
-        Verifica se é dia de publicar curiosidade
-        '''
-        if self.dia_hoje in self.lista_dias:
-            return 1
-        else:
-            return 0
-    
+        self.lista_curiosidades = pd.read_csv("curiosidades.csv", sep=';', encoding='utf-8', header=None)[0]
+
     
     def seleciona_curiosidade(self):
         '''
@@ -77,7 +45,7 @@ class CuriosidadesClass:
         if flag_pode_ser_publicado == 0:
             return 0, ""
         
-        tweet = "Você sabia?\n" + curiosidade + "\n\n" + self.data_hoje_completa + self.hashtag
+        tweet = f"{self.twitter_api.get_inicio_post()}Você sabia?\n{curiosidade}{self.twitter_api.get_fim_post()}"
         
         # verifica se tamanho está ok
         if self.twitter_api.valida_tamanho_tweet(tweet) != 1:
@@ -94,10 +62,6 @@ class CuriosidadesClass:
         # flag de publicação
         if (self.twitter_api.get_status_twitter() != 1):
             print ("Flag 0. Não posso publicar!")
-            return
-        
-        # verifica se é dia de publicar curiosidade
-        if not self.check_dia_publicar():
             return
         
         # seleciona curiosidade para publicar

@@ -9,6 +9,7 @@ lista_palavras_banidas.txt
 *.exe
 teste*
 Teste*
+__pycache__/
 resultados_cidades/
 resultados_portos/
 imagens/

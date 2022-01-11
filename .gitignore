@@ -7,8 +7,8 @@ lista_palavras_banidas.txt
 *.png
 *.csv
 *.exe
-teste*
-Teste*
+teste*.ipynb
+Teste*.ipynb
 __pycache__/
 resultados_cidades/
 resultados_portos/

@@ -1,6 +1,8 @@
 credenciais_twitter.json
+credenciais_user_agent
 lista_palavras_banidas.txt
 .gitignore
 .jpeg
+.jpg
 .png
 *.exe

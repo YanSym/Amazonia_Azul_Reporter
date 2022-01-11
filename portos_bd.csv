@@ -1,0 +1,28 @@
+cidade;uf;qtd_navios_porto;qtd_navios_chegando;status;data
+Santos;SP;101;134;0;05/01/2022
+Rio de Janeiro;RJ;133;43;0;05/01/2022
+Paranaguá;PR;46;45;0;05/01/2022
+Itapoá;SC;2;2;0;05/01/2022
+Rio Grande;RS;49;21;0;05/01/2022
+Suape;PE;22;12;0;05/01/2022
+Itajaí;SC;23;4;0;05/01/2022
+Santos;SP;103;127;1;06/01/2022
+Rio de Janeiro;RJ;123;43;1;06/01/2022
+Paranaguá;PR;45;48;1;06/01/2022
+Itapoá;SC;2;2;1;06/01/2022
+Rio Grande;RS;46;21;1;06/01/2022
+Suape;PE;21;14;1;06/01/2022
+Itajaí;SC;23;4;1;06/01/2022
+Santos;SP;102;133;1;07/01/2022
+Rio de Janeiro;RJ;121;47;1;07/01/2022
+Paranaguá;PR;46;48;0;07/01/2022
+Itapoá;SC;6;2;1;07/01/2022
+Rio Grande;RS;35;21;1;07/01/2022
+Suape;PE;19;16;1;07/01/2022
+Itajaí;SC;22;5;1;07/01/2022
+Santos;SP;98;149;1;11/01/2022
+Rio de Janeiro;RJ;113;50;1;11/01/2022
+Paranaguá;PR;45;49;1;11/01/2022
+Itapoá;SC;4;3;1;11/01/2022
+Rio Grande;RS;39;18;1;11/01/2022
+Suape;PE;16;24;0;11/01/2022

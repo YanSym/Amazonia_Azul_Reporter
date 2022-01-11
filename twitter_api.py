@@ -3,6 +3,9 @@ import Levenshtein
 import pandas as pd
 import tweepy
 import json
+import csv
+import sys
+import os
 
 class TwitterClass:
     """
@@ -12,7 +15,7 @@ class TwitterClass:
         
         # path json twitter
         path_infos_json = "credenciais_twitter.json"
-        path_json_parametros_twitter = "parametros_twitter.json"
+        path_json_flag_publicacao = "flag_publicacao.json"
         path_palavras_banidas = "lista_palavras_banidas.txt"
         self.path_twitter_bd = "tweets_bd.csv"
     
@@ -26,24 +29,28 @@ class TwitterClass:
         f.close()
         
         # leitura do arquivo json com os parâmetros
-        f = open(path_json_parametros_twitter, "r")
+        f = open(path_json_flag_publicacao, "r")
         infos = json.load(f)
-        self.limite_caracteres = int(infos['limite_caracteres'])
-        self.flag_tweet = int(infos["flag_tweet"])
-        self.distancia_minima_tweets = float(infos["distancia_minima_tweets"])
+        self.flag_publicacao = int(infos["flag_publicacao"])
         f.close()
         
-        # Leitura das palavras banidas
+        # cria lista de palavras banidas, caso não exista ainda
+        if not os.path.exists(path_palavras_banidas):
+            file = open(path_palavras_banidas, 'w+')
+            file.close()
+    
+        # leitura das palavras banidas
         f = open(path_palavras_banidas, "r")
         self.lista_palavras_banidas = f.read().split('\n')
         f.close()
         
         # Autentica no Twitter
         try:
+            # login API
             auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
             auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
             
-            # Tweeter API
+            # Twitter API
             api = tweepy.API(auth)
             
             # Verifica credenciais
@@ -53,7 +60,7 @@ class TwitterClass:
         # Erro de autenticação
         except:
             print("Erro de autenticação!")
-            self.api = ''
+            sys.exit(0)
         
         
         self.dict_map_emoji = {'pesca':'\U0001F3A3',
@@ -63,6 +70,8 @@ class TwitterClass:
                                'surf':'\U0001F3C4',
                                'sol':'\U0001F324',
                                'sol_face':'\U0001F31E',
+                               'nuvem':'\U00012601',
+                               'nuvem_sol': '\U000126C5',
                                'chuva':'\U0001F327',
                                'chuva_sol':'\U0001F326',
                                'chuva_relampago':'\U000126C8',
@@ -70,8 +79,27 @@ class TwitterClass:
                                'satelite':'\U0001F6F0',
                                'oculos_sol':"\U0001F60E",
                                'sombra':'\U0001F3D6',
-                               'vento':'\U0001F32A'
+                               'vento':'\U0001F32A',
+                               'dedo_baixo':'\U0001F447',
+                               'tres_pontos':'\U0001F4AC',
+                               'barco_1':'\U000126F4',
+                               'barco_2':'\U0001F6F3',
+                               'barco_3':'\U0001F6A2',
+                               'normal': '\U0001F600',
+                               'sono': '\U0001F634',
+                               'bravo': '\U0001F92C',
+                               'covid': '\U0001F637'
+
                                }
+        
+        # limite de caracteres
+        self.limite_caracteres = 280
+        
+        # distancia minima entre tweets
+        self.distancia_minima_tweets = 0.005
+        
+        # limite de tweets no bd
+        self.limite_tweets = 1_000_000
         
         # inicio do post
         self.inicio_post = f"{self.dict_map_emoji['robo']} "
@@ -80,6 +108,13 @@ class TwitterClass:
         self.fim_post = f"\n\n\n#AmazôniaAzul {self.dict_map_emoji['oceano']}"\
         +f"\n#redebotsdobem {self.dict_map_emoji['satelite']}"
     
+    
+    def valida_tweet(self, tweet):
+        '''
+        retorna flag indicando se o tweet é válido para ser publicados
+        '''
+        return self.verifica_tweet_pode_ser_publicado(tweet) and self.valida_tamanho_tweet(tweet)
+        
     
     def calcula_distancia_strings(self, string1, string2):
         '''
@@ -115,32 +150,75 @@ class TwitterClass:
         '''
         Status do Twitter
         '''
-        return self.flag_tweet
+        return self.flag_publicacao
     
     
     # publica o tweet
-    def make_tweet(self, tweet):
+    def make_tweet(self, tweet, modulo, modo_operacao='padrao', tweet_id=0):
         """
         Publica um tweet utilizando a API do Twitter
         """
-        # publica o Tweet
-        self.api.update_status(tweet)
-        
-        # adiciona tweet ao bd
-        self.adiciona_tweet(tweet)
-        
-        
+        tweet = self.substitui_emojis(tweet)
+        print (tweet)
+        try:
+            if (tweet_id != 0):
+                if modo_operacao == 'padrao':
+                    # publica o Tweet sem foto
+                    status = self.api.update_status(tweet, in_reply_to_status_id=tweet_id)
+
+                elif modo_operacao == 'foto':
+                    # publica o Tweet com foto
+                    status = self.api.update_with_media("foto.png", tweet, in_reply_to_status_id=tweet_id)
+
+                else:
+                    print ('Erro! Modo de operacao nao reconhecido.')
+                    sys.exit(0)
+                    return 0
+
+                # adiciona tweet ao bd
+                try:
+                    self.adiciona_tweet(tweet, modulo)
+                except:
+                    return 0
+
+                # retorna status do tweet
+                return status
+
+            else:
+                if modo_operacao == 'padrao':
+                        # publica o Tweet sem foto
+                        status = self.api.update_status(tweet)
+
+                elif modo_operacao == 'foto':
+                    # publica o Tweet com foto
+                    status = self.api.update_with_media("foto.png", tweet)
+
+                else:
+                    print ('Erro! Modo de operacao nao reconhecido.')
+                    sys.exit(0)
+                    return 0
+
+                # adiciona tweet ao bd
+                try:
+                    self.adiciona_tweet(tweet, modulo)
+                except:
+                    return 0
+
+                # retorna status do tweet
+                return status
+        except Exception as e:
+            return 0
+                    
+            
     def verifica_tweet_ok(self, tweet):
         '''
         Verifica se o tweet está ok
         '''
         try:
             # verifica se tweet possui palavras proibidas
-            for delimitador in [' ', '-', '_']:
-                palavras_tweet = tweet.split(delimitador)
-                for palavra in palavras_tweet:
-                    if palavra in self.lista_palavras_banidas:
-                        return 0
+            for palavra in self.lista_palavras_banidas:
+                if palavra in tweet:
+                    return 0
         except:
             return 0
 
@@ -156,7 +234,7 @@ class TwitterClass:
         lista_tweets_publicados = df_tweets['Tweet'].values.tolist()
         
         # verifica se conteúdo já foi postado
-        for tweet_publicado in lista_tweets_publicados[:100]:
+        for tweet_publicado in lista_tweets_publicados[:-100:-1]:
             distancia = self.calcula_distancia_strings(tweet, tweet_publicado)
             if (distancia < self.distancia_minima_tweets):
                 print (f'Distancia pequena de {distancia}. Tweet vetado, muito similar.')
@@ -166,20 +244,34 @@ class TwitterClass:
         return 1
     
         
-    def adiciona_tweet(self, tweet):
+    def substitui_emojis(self, texto):
+        '''
+        substitui emoji
+        '''
+        lista_emojis = list(self.dict_map_emoji.keys())
+        for emoji in lista_emojis:
+            texto = texto.replace(f"[emoji_{emoji}]", self.dict_map_emoji[emoji])
+        return texto
+        
+        
+    def adiciona_tweet(self, tweet, modulo):
         '''
         Adiciona tweet ao bd
         '''
-        # conteúdo já publicado        
-        lista_tweets_publicados = pd.read_csv(self.path_twitter_bd, sep=';').dropna(subset=['Tweet'])
         
         # data de hoje
         data_hoje = date.today().strftime("%d/%m/%Y")
         
-        # adiciona tweet
-        lista_tweets_publicados.loc[-1] = [tweet, data_hoje]
-        lista_tweets_publicados.index = lista_tweets_publicados.index + 1
-        lista_tweets_publicados = lista_tweets_publicados.sort_index().iloc[:10_000]
+        # adiciona linha
+        linha=[tweet, modulo, data_hoje]
         
-        # atualiza bd
-        lista_tweets_publicados.to_csv(self.path_twitter_bd, index=False, sep=';')
+        # bd atual
+        df_bd = pd.read_csv('tweets_bd.csv', sep=';', encoding='utf-8')
+        
+        # insere linha
+        df_bd.loc[-1] = linha
+        df_bd.index = df_bd.index + 1
+        df_bd = df_bd.sort_index()
+        
+        # salva bd atualizado em csv
+        df_bd.to_csv('tweets_bd.csv', sep=';', index=False)

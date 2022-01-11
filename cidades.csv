@@ -1,43 +1,51 @@
 Cidade;UF;Tabua_mares
-Maceió;AL;alagoas/maceio
-Macapá;AP;amapa/amapa
-Vila Velha;AP;amapa/vila-velha
-Salvador;BA;bahia/salvador
-Trancoso;BA;bahia/trancoso
-Morro de São Paulo;BA;bahia/morro-de-sao-paulo
-Porto Seguro;BA;bahia/porto-seguro
-Fortaleza;CE;ceara/fortaleza
-Porto Canoa;CE;ceara/porto-canoa
-Vitória;ES;espirito-santo/vitoria
-Vila Velha;ES;espirito-santo/vila-velha
-São Luis;MA;maranhao/sao-luis
-Barreirinhas;MA;maranhao/barreirinhas
-João Pessoa;PB;paraiba/joao-pessoa
-Recife;PE;pernambuco/recife
-Olinda;PE;pernambuco/olinda
-Jaboatão dos Guararapes;PE;pernambuco/jaboatao-dos-guararapes
-Barreiros;PE;pernambuco/barreiros
-Porto de Galinhas;PE;pernambuco/porto-de-galinhas
-Parnaíba;PI;piaui/parnaiba
-Paranaguá;PR;parana/paranagua
-Rio de Janeiro;RJ;rio-de-janeiro/rio-de-janeiro
-Niterói;RJ;rio-de-janeiro/niteroi
-Búzios;RJ;rio-de-janeiro/armacao-dos-buzios
-Cabo Frio;RJ;rio-de-janeiro/cabo-frio
-Angra dos Reis;RJ;rio-de-janeiro/angra-dos-reis
-Paraty;RJ;rio-de-janeiro/paraty
-Natal;RN;rio-de-janeiro/angra-dos-reis
-Praia do Sagi;RN;rio-grande-do-norte/praia-do-sagi
-Ponta Negra;RN;rio-grande-do-norte/ponta-negra
-Pedra Grande;RN;rio-grande-do-norte/pedra-grande
-Florianópolis;SC;santa-catarina/florianopolis
-Joinville;SC;santa-catarina/joinville
-Aracaju;SE;sergipe/aracaju
-Guarujá;SP;so-paulo/guaruja
-Santos;SP;so-paulo/santos
-Ubatuba;SP;so-paulo/ubatuba
-Bertioga;SP;so-paulo/bertioga
-Peruíbe;SP;so-paulo/peruibe
-Lagoinha;SP;so-paulo/lagoinha
-Enseada;SP;so-paulo/enseada
-Itanhaém;SP;so-paulo/itanhaem
+Angra dos Reis;RJ;Brazil/Rio-de-Janeiro/Angra-Dos-Reis
+Aracaju;SE;Brazil/Sergipe/Aracaju
+Arraial do Cabo;RJ;Brazil/Rio-de-Janeiro/Arraial-Do-Cabo
+Balneário Camboriu;SC;Brazil/Santa-Catarina/Balneario-Camboriu
+Barreirinhas;MA;Brazil/Maranhao/Barreirinhas/Atins
+Bertioga;SP;Brazil/Sao-Paulo/Bertioga
+Bombinhas;SC;Brazil/Santa-Catarina/Bombinhas
+Búzios;RJ;Brazil/Rio-de-Janeiro/Armacao-De-Buzios
+Cabo Frio;RJ;Brazil/Rio-de-Janeiro/Arraial-Do-Cabo/Cabo-Frio
+Enseada;SP;Brazil/Sao-Paulo/Ubatuba/Praia-da-Enseada
+Fernando de Noronha;PE;Brazil/Pernambuco/Fernando-De-Noronha
+Florianópolis;SC;Brazil/Santa-Catarina/Florianopolis/Barra-da-Lagoa
+Fortaleza;CE;Brazil/Ceara/Fortaleza/Fortaleza
+Guarujá;SP;Brazil/Sao-Paulo/Guaruja
+Ilha Bela;SP;Brazil/Sao-Paulo/Ilhabela/Praia-dos-Castelhanos-(Ilha-Bela)
+Ilhéus;BA;Brazil/Bahia/Ilheus
+Itanhaém;SP;Brazil/Sao-Paulo/Itanhaem
+Jaboatão dos Guararapes;PE;Brazil/Pernambuco/Jaboatao-Dos-Guararapes
+Jijoca de Jericoacoara;CE;Brazil/Ceara/Jijoca-De-Jericoacoara
+João Pessoa;PB;Brazil/Paraiba/Joao-Pessoa/Tambau
+Lagoinha;SP;Brazil/Santa-Catarina/Florianopolis/Lagoinha-do-Leste
+Lauro de Freitas;BA;Brazil/Bahia/Lauro-De-Freitas/Lauro-de-Freitas
+Macaé;RJ;Brazil/Rio-de-Janeiro/Macae
+Macapá;AP;Brazil/Amapa/Macapa
+Maceió;AL;Brazil/Alagoas/Maceio
+Marechal Deodoro;AL;Brazil/Alagoas/Marechal-Deodoro/Praia-do-Frances
+Morro de São Paulo;BA;Brazil/Bahia/Valenca/Morro-de-Sao-Paulo
+Natal;RN;Brazil/Rio-Grande-do-Norte/Natal
+Niterói;RJ;Brazil/Rio-de-Janeiro/Niteroi/Niteroi
+Olinda;PE;Brazil/Pernambuco/Olinda
+Paranaguá;PR;Brazil/Parana/Paranagua/Paranagu
+Paraty;RJ;Brazil/Rio-de-Janeiro/Paraty/Praia-da-Fazenda
+Parnaíba;PI;Brazil/Piaui/Parnaiba/Parnaiba
+Pedra Grande;RN;Brazil/Alagoas/Japaratinga/Porto-de-Pedras
+Peruíbe;SP;Brazil/Sao-Paulo/Peruibe
+Ponta Negra;RN;Brazil/Rio-Grande-do-Norte/Natal/Ponta-Negra
+Porto de Galinhas;PE;Brazil/Pernambuco/Ipojuca/Porto-de-Galinhas
+Porto Seguro;BA;Brazil/Bahia/Porto-Seguro
+Praia Grande;SP;Brazil/Sao-Paulo/Praia-Grande
+Recife;PE;Brazil/Pernambuco/Recife
+Rio das Ostras;RJ;Brazil/Rio-de-Janeiro/Rio-Das-Ostras
+Rio de Janeiro;RJ;Brazil/Rio-de-Janeiro/Rio-de-Janeiro/Rio-de-Janeiro
+Salvador;BA;Brazil/Bahia/Salvador/Salvador
+Santos;SP;Brazil/Sao-Paulo/Santos
+São Luis;MA;Brazil/Maranhao/Sao-Luis
+São Mateus;ES;Brazil/Espirito-Santo/Sao-Mateus/Praia-do-Guriri
+São Sebastião;SP;Brazil/Sao-Paulo/Sao-Sebastiao
+Tibau do Sul;RN;Brazil/Rio-Grande-do-Norte/Tibau-Do-Sul
+Ubatuba;SP;Brazil/Sao-Paulo/Ubatuba
+Vila Velha;ES;Brazil/Espirito-Santo/Vila-Velha

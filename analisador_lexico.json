@@ -1,0 +1,12 @@
+{
+"Preposicao[numero=singular, genero=neutro] em": "em",
+"Preposicao[numero=singular, genero=masculino] em": "no",
+"Preposicao[numero=plural, genero=masculino] em": "nos",
+"Preposicao[numero=singular, genero=feminino] em": "na",
+"Preposicao[numero=plural, genero=feminino] em": "nas",
+"Preposicao[numero=singular, genero=neutro] de": "de",
+"Preposicao[numero=singular, genero=masculino] de": "do",
+"Preposicao[numero=singular, genero=feminino] de": "da",
+"Preposicao[numero=plural, genero=masculino] de": "dos",
+"Preposicao[numero=plural, genero=feminino] de": "das"
+}

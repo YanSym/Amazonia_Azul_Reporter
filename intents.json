@@ -1,0 +1,258 @@
+{
+"NORMAL":
+[
+"Bom dia a todos! Como estão se sentindo hoje: [1] [emoji_normal], [2] [emoji_sono] ou [3] [emoji_bravo]?\n\nHoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO por do sol será às [horario_por_sol]!",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO por do sol será às [horario_por_sol]. Um bom dia para todos! [emoji_sol]",
+    
+"Bom dia para todos! A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nO por do sol será às [horario_por_sol]! [emoji_sol]",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA temperatura máxima prevista é de [temperatura_max]°C e a mínima de [temperatura_min]°C. O por do sol será às [horario_por_sol]. [emoji_sol]",
+    
+
+"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nA temperatura máxima prevista é de [temperatura_max]°C e a mínima de [temperatura_min]°C. O por do sol será às [horario_por_sol]. [emoji_sol]",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h. Um bom dia para todos!",
+    
+ 
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h. Desejo um bom dia para todos!",
+    
+    
+"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h. Desejo bom dia para todos!",
+    
+  
+"Bom dia a todos, como estão vocês? :)\nHoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]",
+    
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca], mas por favor evite pesca predatória! [emoji_pesca]",
+
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\n\n[texto_onda].",
+    
+
+"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\n\n[texto_onda]."
+
+],
+    
+    
+"TEMP_IGUAIS":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nAs temperaturas máxima e mínima previstas também são de [temperatura]°C. O por do sol será às [horario_por_sol]. [emoji_sol]",
+    
+    
+"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nAs temperaturas máxima e mínima previstas também são de [temperatura]°C. O por do sol será às [horario_por_sol]. [emoji_sol]",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+    
+  
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]",
+    
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca], mas por favor evite pesca predatória! [emoji_pesca]",
+
+    
+"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca], mas evitem fazer pesca predatória! [emoji_pesca]",
+
+    
+"Bom dia a todos! Como estão se sentindo hoje: [1] [emoji_normal], [2] [emoji_sono] ou [3] [emoji_bravo]?\n\nHoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\n\n[texto_onda]."
+
+],
+    
+"TEMPERATURA_ALTA_OUTLIER":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é uma temperatura mais elevada do que o normal para essa cidade durante essa época do ano.",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+    
+  
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito maior do que o normal, portanto passe protetor solar ao sair de casa! O melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]"
+
+],
+    
+    
+"TEMPERATURA_BAIXA_OUTLIER":
+[
+"Bom dia! Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é uma temperatura menor do que o normal para essa cidade durante essa época do ano.",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.\nDesejo a todos um ótimo dia!",
+    
+  
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito menor do que o normal, portanto leve roupas de frio caso precise sair de casa! Desejo um bom dia para todos!",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito menor do que o normal, portanto leve roupas de frio caso precise sair de casa! O melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]"
+
+],
+    
+
+"BOM_PESCAR":
+[
+"Bom dia a todos! Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+    
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nHoje é um excelente dia para pescar! O melhor horário para pescar é [melhor_horario_pesca], mas por favor evite pesca predatória! [emoji_pesca]",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nHoje é um excelente dia para pescar! O melhor horário para pescar é [melhor_horario_pesca], mas por favor evite pesca predatória! [emoji_pesca]",
+    
+ 
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nHoje é um dia muito bom para pescar, e o melhor horário é [melhor_horario_pesca]! [emoji_pesca]",
+   
+    
+"Bom dia a todos! Como estão se sentindo hoje: [1] [emoji_normal], [2] [emoji_sono] ou [3] [emoji_bravo]?\nHoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\n\n[texto_onda]."
+
+],
+    
+ 
+    
+"MAR_NAO_ESTA_PARA_PEIXES":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nCom uma altura de maré máxima de [altura_maior_onda]m e condições desfavoráveis para pescar, o mar hoje não está para peixes! [emoji_peixe]",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nCom uma altura do mar máxima de aproximadamente [altura_maior_onda]m e condições desfavoráveis para pescar, o mar hoje não está para peixes! [emoji_peixe]",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C e altura máxima do mar de aproximadamente [altura_maior_onda]m. Hoje não é um bom dia para pescar! [emoji_peixe]"
+],
+    
+  
+
+"SOL_ULTRAVIOLETA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA temperatura máxima prevista é de [temperatura_max]°C e a mínima de [temperatura_min]°C.",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\n\n[texto_onda].",
+
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA temperatura máxima prevista é de [temperatura_max]°C e a mínima de [temperatura_min]°C.\nUtilize protetor solar durante o dia! [emoji_sombra]",
+    
+ 
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA temperatura máxima prevista é de [temperatura_max]°C e a mínima de [temperatura_min]°C.\nUtilize protetor se precisar sair de casa! [emoji_sombra]",
+
+ 
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO índice ultravioleta hoje está elevado! \nUtilize protetor solar, camiseta e óculos de sol. [emoji_oculos_sol]"
+],
+    
+    
+  
+"UMIDADE_ALTA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA umidade hoje está mais elevada do que o normal ([umidade]%)."
+],
+    
+    
+"NEBULOSIDADE_ALTA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nAtenção! A nebulosidade do céu hoje está mais elevada do que o normal ([nebulosidade]%)."
+],
+    
+    
+ 
+"VENTO_ALTO":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+    
+
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA velocidade do vento hoje está mais elevada do que o normal ([vento] km/h).!"
+],
+
+
+
+"TEMPERATURA_MAXIMA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é a maior temperatura registrada nessa cidade nos últimos [qtd_dias_temperatura_max] dias! [emoji_sombra]",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é a maior temperatura registrada nos últimos [qtd_dias_temperatura_max] dias. O indice ultravioleta hoje está elevado, utilize protetor solar se precisar sair de casa! [emoji_sombra]"
+],
+    
+
+"TEMPERATURA_MINIMA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é a menor temperatura registrada nessa cidade nos últimos [qtd_dias_temperatura_min] dias!"
+],
+    
+
+
+"NEBULOSIDADE_MAXIMA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma nebulosidade do céu de [nebulosidade]%.\nEssa é a maior nebulosidade registrada nos últimos [qtd_dias_nebulosidade_max] dias!",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma nebulosidade do céu de [nebulosidade]%.\nEssa é a maior nebulosidade registrada nessa cidade nos últimos [qtd_dias_nebulosidade_max] dias!"
+],
+    
+    
+"UMIDADE_MAXIMA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma umidade de [umidade]%.\nEssa é a maior umidade registrada nos últimos [qtd_dias_umidade_max] dias!",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma umidade de [umidade]%.\nEssa é a maior umidade registrada nessa cidade nos últimos [qtd_dias_umidade_max] dias!"
+],
+    
+    
+    
+"VENTO_MAXIMA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma velocidade do vento de [vento] km/h.\nEsse é a maior ventania registrada nessa cidade nos últimos [qtd_dias_vento_max] dias! [emoji_vento]",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma velocidade do vento de [vento] km/h.\nEsse é a maior ventania registrada nos últimos [qtd_dias_vento_max] dias! [emoji_vento]"
+],
+    
+    
+    
+"ONDA_MAXIMA":
+[
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com um nível de onda máximo de [altura_maior_onda]m. Essa é a maior maré registrada nessa cidade nos últimos [qtd_dias_onda_max] dias! [emoji_surf]",
+    
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com um nível de onda máximo de [altura_maior_onda]m. Essa é a maior maré registrada nos últimos [qtd_dias_onda_max] dias! [emoji_surf]"
+],
+    
+    
+"REPORT_NAVIOS":
+[
+"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]) nesse momento e [qtd_navios_chegando] embarcações agendadas para entrar dentro dos próximos dias. [emoji_barco] Desejo um ótimo dia pra todos!",
+    
+"Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]) e [qtd_navios_chegando] e estão agendadas para entrar no porto ao longo dos próximos dias. [emoji_barco]",
+    
+"Hoje, dia [data_hoje], foi estimada uma quantidade de [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]). Além disso, é esperado que [qtd_navios_chegando] embarcações entrem no porto ao longo dos próximos dias. [emoji_barco]"
+],
+    
+    
+"NAVIOS_MAXIMA":
+[
+"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a maior quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_max] dias! [emoji_barco]",
+    
+"Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a maior quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_max] dias! [emoji_barco]"
+],
+    
+"NAVIOS_MINIMA":
+[
+"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a menor quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_min] dias! [emoji_barco]",
+    
+"Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a menor quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_min] dias! [emoji_barco]"
+],
+    
+"NAVIOS_ALTA":
+[
+"Bom dia a todos! Como estão se sentindo?\nHoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_barco]",
+    
+"Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_barco]"
+]
+
+    
+}

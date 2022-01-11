@@ -25,12 +25,11 @@ class HelperClassNews:
         self.dict_header = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"}
         self.url_google_news = "https://news.google.com"
     
-        # leitura do arquivo json com os parâmetros das notícias
-        f = open(path_json_parametros_news, "r")
-        infos = json.load(f)
-        self.lista_pesquisas = infos['lista_pesquisas']
-        self.max_news_check = int(infos['max_news_check'])
-        f.close()
+        # lista de pesquisas
+        self.lista_pesquisas = pd.read_csv("pesquisas.csv", sep=';', encoding='utf-8', header=None)[0]
+        self.max_news_check = 5
+        self.max_publicacoes = 3
+        self.modulo = 'noticias'
     
     
     def prepara_tweet(self, noticia, link):
@@ -98,12 +97,19 @@ class HelperClassNews:
         # pesquisa notícias
         df_news = self.pesquisa_news()
 
-        if (len(df_news) == 0):
+        try:
+            if (len(df_news) == 0):
+                return
+        except:
             return
         
         # itera lista de noticias
+        contador_publicacoes = 0
         for index in range(len(df_news['Noticia'])):
 
+            if (contador_publicacoes >= self.max_publicacoes):
+                break
+            
             try:
                 # cria o tweet
                 noticia = df_news.iloc[index]['Noticia']
@@ -112,14 +118,12 @@ class HelperClassNews:
 
                 # verifica se tweet está ok
                 if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and self.twitter_api.valida_tamanho_tweet(tweet)):
-
-                    self.twitter_api.make_tweet(tweet)
-                    print ('Tweet publicado!')
-                    return
+                    status = self.twitter_api.make_tweet(tweet, self.modulo)
+                    if (status != 0):
+                        print (tweet)
+                        print ('Tweet publicado!')
+                        contador_publicacoes+=1
 
             # erro
             except Exception as e:
                 continue
-
-        # não conseguiu publicar
-        print ('Não consegui publicar. Algo está errado.')

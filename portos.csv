@@ -1,10 +1,8 @@
-Cidade;UF;URL
-Santos;SP;
-Paranaguá;PR;
-Itapoá;SC;
-Portonave;SC;
-Rio Grande;RS;
-Chibatão;AM;
-Suape;PE;
-Itajaí;SC;
-Rio de Janeiro;RJ;
+Cidade;UF;URL1;URL2
+Santos;SP;https://www.marinetraffic.com/en/ais/home/centerx:-46.328/centery:-23.958/zoom:12;https://www.marinetraffic.com/en/ais/details/ports/189
+Rio de Janeiro;RJ;https://www.marinetraffic.com/en/ais/home/centerx:-43.178/centery:-22.849/zoom:12;https://www.marinetraffic.com/en/ais/details/ports/264
+Paranaguá;PR;https://www.marinetraffic.com/en/ais/home/centerx:-48.492/centery:-25.498/zoom:12;https://www.marinetraffic.com/en/ais/details/ports/1736
+Itapoá;SC;https://www.marinetraffic.com/en/ais/home/centerx:-48.632/centery:-26.222/zoom:12;https://www.marinetraffic.com/en/ais/details/ports/5057
+Rio Grande;RS;https://www.marinetraffic.com/en/ais/home/centerx:-52.1/centery:-32.1/zoom:11;https://www.marinetraffic.com/en/ais/details/ports/17380
+Suape;PE;https://www.marinetraffic.com/en/ais/home/centerx:-34.969/centery:-8.380/zoom:13;https://www.marinetraffic.com/en/ais/details/ports/2753
+Itajaí;SC;https://www.marinetraffic.com/en/ais/home/centerx:-48.662/centery:-26.902/zoom:12;https://www.marinetraffic.com/en/ais/details/ports/2481

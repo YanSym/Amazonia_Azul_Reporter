@@ -3,9 +3,9 @@ This repo contains code and corpora for the twitter robot-journalists @BLAB_Repo
 
 # Requirements
 Dependencies to run the code may be installed by the following command:
-'''
+```
 pip install -r requirements.txt
-'''
+```
 
 # Database
 Non-linguistic data about the Brazilian Blue Amazon extracted with permissue from the web and stored in a private database. Source data can be retrieved from:

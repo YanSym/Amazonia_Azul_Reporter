@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 import requests
-import sys
 import urllib
+import time
 import json
+import sys
 from datetime import date
 from bs4 import BeautifulSoup
 from twitter_api import TwitterClass
@@ -123,6 +124,7 @@ class HelperClassNews:
                         print (tweet)
                         print ('Tweet publicado!')
                         contador_publicacoes+=1
+                        time.sleep(60)
 
             # erro
             except Exception as e:

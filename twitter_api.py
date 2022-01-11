@@ -71,7 +71,7 @@ class TwitterClass:
                                'sol':'\U0001F324',
                                'sol_face':'\U0001F31E',
                                'nuvem':'\U00012601',
-                               'nuvem_sol':'\U000126C5',
+                               'nuvem_sol':'\U0001F326',
                                'chuva':'\U0001F327',
                                'chuva_sol':'\U0001F326',
                                'chuva_relampago':'\U000126C8',

@@ -4,6 +4,7 @@ import requests
 import random
 import heapq
 import nltk
+import time
 import json
 import sys
 import re
@@ -192,6 +193,7 @@ class HelperClassMarsemfim:
                             status = self.twitter_api.make_tweet(resumo, self.modulo, tweet_id=str(status.id_str))
                     
                         print ('Tweet publicado!')
+                        time.sleep(60)
                         contador_publicacoes+=1
 
             # erro

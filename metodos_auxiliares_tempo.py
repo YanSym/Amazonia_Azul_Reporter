@@ -130,7 +130,7 @@ class HelperClassTempo:
                                'Clear': 'sol [emoji_sol]',
                                'Overcast': 'céu nublado [emoji_nuvem]',
                                'Cloudy': 'céu nublado [emoji_nuvem]',
-                               'Partly cloudy': 'céu parcialmente nublado [emoji_nuvem_sol]',
+                               'Partly cloudy': 'céu parcialmente nublado [emoji_nuvem]',
                                'Light rain shower': 'chuvas leves [emoji_chuva_sol]',
                                'Patchy rain possible': 'períodos de chuva ao longo do dia [emoji_chuva]',
                                'Moderate or heavy rain shower': 'chuvas fortes ao longo do dia [emoji_chuva_relampago]'}

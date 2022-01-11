@@ -71,7 +71,7 @@ class TwitterClass:
                                'sol':'\U0001F324',
                                'sol_face':'\U0001F31E',
                                'nuvem':'\U00012601',
-                               'nuvem_sol': '\U000126C5',
+                               'nuvem_sol':'\U000126C5',
                                'chuva':'\U0001F327',
                                'chuva_sol':'\U0001F326',
                                'chuva_relampago':'\U000126C8',
@@ -250,6 +250,7 @@ class TwitterClass:
         '''
         lista_emojis = list(self.dict_map_emoji.keys())
         for emoji in lista_emojis:
+            texto = texto.replace(f"[{emoji}]", self.dict_map_emoji[emoji])
             texto = texto.replace(f"[emoji_{emoji}]", self.dict_map_emoji[emoji])
         return texto
         

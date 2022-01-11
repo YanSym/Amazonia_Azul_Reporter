@@ -126,7 +126,9 @@ class HelperClassTempo:
             pd.DataFrame(columns=self.lista_colunas_salvar).to_csv(self.path_bd, sep=';', index=False)
         
         # colunas de clima
-        self.dict_map_clima = {'Overcast': 'céu nublado [emoji_nuvem]',
+        self.dict_map_clima = {'Sunny': 'muito sol [emoji_sol]',
+                               'Clear': 'sol [emoji_sol]',
+                               'Overcast': 'céu nublado [emoji_nuvem]',
                                'Cloudy': 'céu nublado [emoji_nuvem]',
                                'Partly cloudy': 'céu parcialmente nublado [emoji_nuvem_sol]',
                                'Light rain shower': 'chuvas leves [emoji_chuva_sol]',

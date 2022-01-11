@@ -63,9 +63,11 @@ class TwitterClass:
             sys.exit(0)
         
         
-        self.dict_map_emoji = {'pesca':'\U0001F3A3',
+        self.dict_map_emoji = {'grafico':'\U0001F4CA',
+                               'pesca':'\U0001F3A3',
                                'peixe':'\U0001F41F',
                                'oceano':'\U0001F305',
+                               'onda':'\U0001F30A',
                                'robo':'\U0001F916',
                                'surf':'\U0001F3C4',
                                'sol':'\U0001F324',

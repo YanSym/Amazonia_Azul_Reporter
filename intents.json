@@ -3,7 +3,6 @@
 [
 "Bom dia! Como vocês estão?\nA previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.",
     
-    
 "Bom dia a todos! A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.",
     
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C. O por do sol será às [horario_por_sol].\nDesejamos um bom dia para todos! [emoji_sol]",
@@ -153,9 +152,9 @@
     
 "TEMPERATURA_MAXIMA":
 [
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é a maior temperatura registrada nessa cidade nos últimos [qtd_dias_temperatura_max] dias! [emoji_sombra]",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é a maior temperatura registrada nessa cidade nos últimos [qtd_dias_temperatura_max] dias! [emoji_sombra] [emoji_grafico]",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é a maior temperatura registrada nos últimos [qtd_dias_temperatura_max] dias. O indice ultravioleta hoje está elevado, utilize protetor solar se precisar sair de casa! [emoji_sombra]"
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é a maior temperatura registrada nos últimos [qtd_dias_temperatura_max] dias. O indice ultravioleta hoje está elevado, utilize protetor solar se precisar sair de casa! [emoji_sombra] [emoji_grafico]"
 ],
     
 
@@ -168,33 +167,33 @@
 
 "NEBULOSIDADE_MAXIMA":
 [
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma nebulosidade do céu de [nebulosidade]%.\nEssa é a maior nebulosidade registrada nos últimos [qtd_dias_nebulosidade_max] dias!",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma nebulosidade do céu de [nebulosidade]%.\nEssa é a maior nebulosidade registrada nos últimos [qtd_dias_nebulosidade_max] dias! [emoji_grafico]",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma nebulosidade do céu de [nebulosidade]%.\nEssa é a maior nebulosidade registrada nessa cidade nos últimos [qtd_dias_nebulosidade_max] dias!"
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma nebulosidade do céu de [nebulosidade]%.\nEssa é a maior nebulosidade registrada nessa cidade nos últimos [qtd_dias_nebulosidade_max] dias! [emoji_grafico]"
 ],
     
     
 "UMIDADE_MAXIMA":
 [
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma umidade de [umidade]%.\nEssa é a maior umidade registrada nos últimos [qtd_dias_umidade_max] dias!",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma umidade de [umidade]%.\nEssa é a maior umidade registrada nos últimos [qtd_dias_umidade_max] dias! [emoji_grafico]",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma umidade de [umidade]%.\nEssa é a maior umidade registrada nessa cidade nos últimos [qtd_dias_umidade_max] dias!"
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma umidade de [umidade]%.\nEssa é a maior umidade registrada nessa cidade nos últimos [qtd_dias_umidade_max] dias! [emoji_grafico]"
 ],
     
     
 "VENTO_MAXIMA":
 [
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma velocidade do vento de [vento] km/h.\nEsse é a maior ventania registrada nessa cidade nos últimos [qtd_dias_vento_max] dias! [emoji_vento]",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma velocidade do vento de [vento] km/h.\nEsse é a maior ventania registrada nessa cidade nos últimos [qtd_dias_vento_max] dias! [emoji_vento] [emoji_grafico]",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma velocidade do vento de [vento] km/h.\nEsse é a maior ventania registrada nos últimos [qtd_dias_vento_max] dias! [emoji_vento]"
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma velocidade do vento de [vento] km/h.\nEsse é a maior ventania registrada nos últimos [qtd_dias_vento_max] dias! [emoji_vento] [emoji_grafico]"
 ],
     
     
 "ONDA_MAXIMA":
 [
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com um nível de onda máximo de [altura_maior_onda]m. Essa é a maior maré registrada nessa cidade nos últimos [qtd_dias_onda_max] dias! [emoji_surf]",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com um nível de onda máximo de [altura_maior_onda]m. Essa é a maior maré registrada nessa cidade nos últimos [qtd_dias_onda_max] dias! [emoji_surf] [emoji_grafico]",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com um nível de onda máximo de [altura_maior_onda]m. Essa é a maior maré registrada nos últimos [qtd_dias_onda_max] dias! [emoji_surf]"
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com um nível de onda máximo de [altura_maior_onda]m. Essa é a maior maré registrada nos últimos [qtd_dias_onda_max] dias! [emoji_surf] [emoji_grafico]"
 ],
     
     
@@ -214,7 +213,7 @@
     
 "NAVIOS_MAXIMA":
 [
-"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a maior quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_max] dias! [emoji_barco]",
+"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a maior quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_max] dias! [emoji_grafico] [emoji_barco]",
     
 "Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a maior quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_max] dias! [emoji_barco]"
 ],
@@ -222,7 +221,7 @@
     
 "NAVIOS_MINIMA":
 [
-"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a menor quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_min] dias! [emoji_barco]",
+"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a menor quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_min] dias! [emoji_grafico] [emoji_barco]",
     
 "Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é a menor quantidade de navios registrada nesse porto nos últimos [qtd_dias_navios_min] dias! [emoji_barco]"
 ],
@@ -230,7 +229,7 @@
     
 "NAVIOS_ALTA":
 [
-"Bom dia a todos! Como vocês estão?\nHoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_barco]",
+"Bom dia a todos! Como vocês estão?\nHoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_grafico] [emoji_barco]",
     
 "Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_barco]"
 ]

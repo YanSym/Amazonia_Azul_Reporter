@@ -1,5 +1,5 @@
 # Repórter da Amazônia Azul 
-Este repositório contém código e corpora do robô-jornalista @BLAB_Reporter
+Este repositório contém o código e o corpora do robô-jornalista @BLAB_Reporter
 
 # Requerimientos
 As dependências para executar os processos podem ser instaladas pelo seguinte comando:

@@ -12,6 +12,7 @@ import unidecode
 from PIL import Image
 from datetime import date
 from selenium import webdriver
+from discourse_ordering import DiscourseOrderingClass
 from twitter_api import TwitterClass
 
 class ImagensClass:
@@ -27,10 +28,11 @@ class ImagensClass:
         self.twitter_api = TwitterClass()
         
         # arquivos auxiliares
-        self.path_infos_portos='portos.csv'
-        self.path_bd = 'portos_bd.csv'
+        self.path_infos_portos="portos.csv"
+        self.path_bd = "portos_bd.csv"
         path_intents = "intents.json"
         path_analisador_lexico = "analisador_lexico.json"
+        self.discourse_ordering_object = DiscourseOrderingClass()
         
         # leitura do arquivo json com os intents
         f = open(path_intents, encoding='utf-8', mode="r")
@@ -287,7 +289,7 @@ class ImagensClass:
     
     def gera_df_navios(self):
         '''
-        Gera resultados dos climas
+        Gera resultados
         '''
     
         lista_infos = []
@@ -456,6 +458,9 @@ class ImagensClass:
             for palavra in self.lista_palavras_analisador_lexico:
                 valor = self.get_analisador_lexico(palavra, numero, genero)
                 texto_selecionado = texto_selecionado.replace(f"[{palavra}]", valor)
+                
+            # atribui ordenação do discurso (discourse ordering)
+            texto_selecionado = self.discourse_ordering_object.discourse_ordering(intent, texto_selecionado)
             
             # adiciona pós-processamentos ao tweet
             tweet = f"{self.twitter_api.get_inicio_post()}{texto_selecionado.strip()}\n\nFonte: MarineTraffic{self.twitter_api.get_fim_post()}"
@@ -639,13 +644,14 @@ class ImagensClass:
                     print ('tweet vazio. tweet não pode ser publicado.')
                     continue
 
+                lista_atributos = ', '.join(df_linha.values.tolist())
                 # verifica se tweet pode ser publicado                
                 if (self.twitter_api.valida_tweet(tweet)):
                     try:
                         if (status == '1'):
-                            self.twitter_api.make_tweet(tweet, self.modulo, 'foto')
+                            self.twitter_api.make_tweet(tweet, self.modulo, intent, lista_atributos, 'foto')
                         else:
-                            self.twitter_api.make_tweet(tweet, self.modulo, 'padrao')
+                            self.twitter_api.make_tweet(tweet, self.modulo, intent, lista_atributos, 'padrao')
                         
                         # espera um tempo para publicar novamente
                         print ('Tweet publicado')

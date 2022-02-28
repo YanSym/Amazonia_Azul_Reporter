@@ -100,7 +100,7 @@ class CuriosidadesClass:
 
         # tenta publicar 
         try:
-            self.twitter_api.make_tweet(tweet, self.modulo)
+            self.twitter_api.make_tweet(tweet, self.modulo, "vazio", "vazio")
             print ('Tweet publicado!')
 
         # algo deu errado

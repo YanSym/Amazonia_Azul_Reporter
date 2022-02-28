@@ -1,31 +1,23 @@
 {
 "NORMAL":
 [
-"Bom dia! Como vocês estão?\nA previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.",
+"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.",
     
-"Bom dia a todos! A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C. O por do sol será às [horario_por_sol].",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C. O por do sol será às [horario_por_sol].\nDesejamos um bom dia para todos! [emoji_sol]",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C. O por do sol será às [horario_por_sol]",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C. O por do sol será às [horario_por_sol].\nDesejamos um excelente dia para todos! [emoji_sol]",
-    
-"Bom dia para todos! A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nO por do sol será às [horario_por_sol]! [emoji_sol]",
+"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nO por do sol será às [horario_por_sol]! [emoji_sol]",
     
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA temperatura máxima prevista é de [temperatura_max]°C e a mínima de [temperatura_min]°C. O por do sol será às [horario_por_sol]. [emoji_sol]",
     
 "A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nA temperatura máxima prevista é de [temperatura_max]°C e a mínima de [temperatura_min]°C. O por do sol será às [horario_por_sol]. [emoji_sol]",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h. Um bom dia para todos!",
+"[permuta]A previsão do tempo hoje é de [tempo] [em] [cidade] ([uf]), com uma temperatura média de [temperatura]°C.\nA [0]nebulosidade é de [nebulosidade]%[1]umidade é de [umidade]%[2]velocidade do vento é de [vento] km/h",
+    
+"[permuta]Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA [0]nebulosidade é de [nebulosidade]%[1]umidade é de [umidade]%[2]velocidade do vento é de [vento] km/h",
  
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.\nDesejo um bom dia para todos!",
-       
-"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.\nDesejo um bom dia para todos!",
-
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.\nDesejamos um bom dia para todos!",
-    
-"A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.\nDesejamos um bom dia para todos!",
-    
-"Bom dia a todos, como estão vocês? :)\nHoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]",
     
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca], mas por favor evite pesca predatória! [emoji_pesca]",
  
@@ -50,7 +42,9 @@
 
 "A previsão do tempo hoje [em] [cidade] ([uf]) é de [tempo], com uma temperatura média de [temperatura]°C.\nO melhor horário para pescar é [melhor_horario_pesca], mas evitem fazer pesca predatória! [emoji_pesca]",
     
-"Bom dia! Como vocês estão?\nHoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C."
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.",
+    
+"A previsão do tempo é de [tempo] [em] [cidade] ([uf]), com uma temperatura média de [temperatura]°C."
 
 ],
   
@@ -59,7 +53,7 @@
 [
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é uma temperatura mais elevada do que o normal para essa cidade durante essa época do ano.",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+"[permuta]Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA [0]nebulosidade é de [nebulosidade]%[1]umidade é de [umidade]%[2]velocidade do vento é de [vento] km/h",
     
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito maior do que o normal, portanto passe protetor solar ao sair de casa! O melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]"
 
@@ -68,15 +62,17 @@
     
 "TEMPERATURA_BAIXA_OUTLIER":
 [
-"Bom dia! Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é uma temperatura menor do que o normal para essa cidade durante essa época do ano.",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nEssa é uma temperatura menor do que o normal para essa cidade durante essa época do ano.",
     
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.\nDesejo a todos um ótimo dia!",
+"A previsão do tempo é de [tempo] hoje [em] [cidade] ([uf]), com uma temperatura média de [temperatura]°C.\nEssa é uma temperatura menor do que o normal para a cidade durante essa época do ano.",
+    
+"[permuta]Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA [0]nebulosidade é de [nebulosidade]%[1]umidade é de [umidade]%[2]velocidade do vento é de [vento] km/h",
   
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito menor do que o normal, portanto leve roupas de frio caso precise sair de casa! Desejo um bom dia para todos!",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito menor do que o normal, portanto leve roupas de frio caso precise sair de casa!",
     
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.\nDesejamos a todos um ótimo dia!",
   
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito menor do que o normal, portanto leve roupas de frio caso precise sair de casa! Desejamos um bom dia para todos!",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito menor do que o normal, portanto leve roupas de frio caso precise sair de casa!",
 
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo].\nHoje a temperatura de [temperatura]°C está muito menor do que o normal, portanto leve roupas de frio caso precise sair de casa! O melhor horário para pescar é [melhor_horario_pesca]! [emoji_pesca]"
 
@@ -85,7 +81,7 @@
 
 "BOM_PESCAR":
 [
-"Bom dia a todos! Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
     
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nHoje é um excelente dia para pescar! O melhor horário para pescar é [melhor_horario_pesca], mas por favor evite pesca predatória! [emoji_pesca]",
 
@@ -93,7 +89,7 @@
     
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nHoje é um dia muito bom para pescar, e o melhor horário é [melhor_horario_pesca]! [emoji_pesca]",
    
-"Bom dia a todos! Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\n\n[texto_onda]"
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\n\n[texto_onda]"
 
 ],
 
@@ -146,7 +142,7 @@
 [
 "Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA nebulosidade é de [nebulosidade]%, a umidade de [umidade]% e a velocidade do vento de [vento] km/h.",
 
-"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA velocidade do vento hoje está mais elevada do que o normal ([vento] km/h).!"
+"Hoje [em] [cidade] ([uf]) a previsão do tempo é de [tempo], com uma temperatura média de [temperatura]°C.\nA velocidade do vento hoje está mais elevada do que o normal ([vento] km/h)."
 ],
 
     
@@ -199,7 +195,9 @@
     
 "REPORT_NAVIOS":
 [
-"Bom dia a todos! Hoje ([data_hoje]) foi estimada uma quantidade de [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]). Além disso, é esperado que [qtd_navios_chegando] embarcações entrem no porto ao longo dos próximos dias. [emoji_barco]",
+"Hoje ([data_hoje]) foi estimada uma quantidade de [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]). Além disso, é esperado que [qtd_navios_chegando] embarcações entrem no porto ao longo dos próximos dias. [emoji_barco]",
+    
+"Foi estimada uma quantidade de [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]) hoje, [data_hoje]. Além disso, é esperado que [qtd_navios_chegando] embarcações entrem no porto ao longo dos próximos dias. [emoji_barco]",
     
 "Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]) nesse momento e [qtd_navios_chegando] embarcações agendadas para entrar dentro dos próximos dias. [emoji_barco] Desejo um ótimo dia pra todos!",
     
@@ -207,7 +205,9 @@
     
 "Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]) e [qtd_navios_chegando] e estão agendadas para entrar no porto ao longo dos próximos dias. [emoji_barco]",
     
-"Hoje, dia [data_hoje], foi estimada uma quantidade de [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]). Além disso, é esperado que [qtd_navios_chegando] embarcações entrem no porto ao longo dos próximos dias. [emoji_barco]"
+"Hoje, dia [data_hoje], foi estimada uma quantidade de [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]). Além disso, é esperado que [qtd_navios_chegando] embarcações entrem no porto ao longo dos próximos dias. [emoji_barco]",
+    
+"Foi estimada uma quantidade de [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]) hoje, dia [data_hoje]. Além disso, é esperado que [qtd_navios_chegando] embarcações entrem no porto ao longo dos próximos dias. [emoji_barco]"
 ],
     
     
@@ -229,10 +229,71 @@
     
 "NAVIOS_ALTA":
 [
-"Bom dia a todos! Como vocês estão?\nHoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_grafico] [emoji_barco]",
+"Hoje, dia [data_hoje], existem [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_grafico] [emoji_barco]",
+    
+"Existem no momento [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]) hoje, dia [data_hoje].\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_grafico] [emoji_barco]",
     
 "Hoje, dia [data_hoje], foram detectadas [qtd_navios_porto] embarcações no porto [de] [cidade] ([uf]).\nEssa é uma quantidade de navios maior do que a usual para essa localização, precisamos estar alertas! [emoji_barco]"
-]
-
+],
     
+    
+"TERREMOTO_0":
+[
+"O Centro de Sismologia da Universidade de São Paulo (USP) detectou hoje ([data_hoje]) um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP) um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Um pequeno terremoto em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP). Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] metros."
+],
+    
+    
+"TERREMOTO_1":
+[
+"O Centro de Sismologia da Universidade de São Paulo (USP) detectou hoje ([data_hoje]) um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP) um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Um pequeno terremoto em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP). Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] metros."
+],
+    
+    
+"TERREMOTO_2":
+[
+"O Centro de Sismologia da Universidade de São Paulo (USP) detectou hoje ([data_hoje]) um terremoto médio em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP) um terremoto médio em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Um terremoto médio em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP). Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] metros."
+],
+    
+    
+"TERREMOTO_3":
+[
+"O Centro de Sismologia da Universidade de São Paulo (USP) detectou hoje ([data_hoje]) um grande terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP) um grande terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros.",
+    
+"Um terremoto grande em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP). Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] metros."
+],
+    
+    
+"TERREMOTO_4":
+[
+"O Centro de Sismologia da Universidade de São Paulo (USP) detectou hoje ([data_hoje]) um enorme terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros. Fiquem seguros e alertas!",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP) um enorme terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros. Fiquem seguros e alertas!",
+    
+"Um terremoto enorme em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP). Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] metros. Fiquem seguros e alertas!",
+    
+"Um terremoto enorme em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP). Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] metros. Fiquem seguros!"
+],
+
+"TERREMOTO_5":
+[
+"O Centro de Sismologia da Universidade de São Paulo (USP) detectou hoje ([data_hoje]) um enorme terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros. Fiquem seguros e alertas!",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP) um enorme terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] metros. Fiquem seguros e alertas!",
+    
+"Um terremoto enorme em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da Universidade de São Paulo (USP). Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] metros. Fiquem seguros e alertas!"
+]
 }

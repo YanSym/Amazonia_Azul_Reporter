@@ -11,6 +11,7 @@ from datetime import date
 import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from discourse_ordering import DiscourseOrderingClass
 from twitter_api import TwitterClass
 
 
@@ -27,11 +28,12 @@ class HelperClassTempo:
         self.twitter_api = TwitterClass()
         
         # arquivos auxiliares
-        self.path_infos_cidades='cidades.csv'
-        self.path_bd = 'cidades_bd.csv'
+        self.path_infos_cidades="cidades.csv"
+        self.path_bd = "cidades_bd.csv"
         path_credenciais_user_agent = "credenciais_user_agent.json"
         path_intents = "intents.json"
         path_analisador_lexico = "analisador_lexico.json"
+        self.discourse_ordering_object = DiscourseOrderingClass()
         
         # leitura do arquivo json com as credenciais
         try:
@@ -74,6 +76,7 @@ class HelperClassTempo:
         self.qtd_cidades_selecionadas = 15
         self.qtd_min_dias_consecutivos = 10
         self.multiplicador_std = 1.3
+        self.altura_mare_ruim = 1.6
         self.filler_tempo = 'céu nublado'
         self.modulo = 'tempo'
         
@@ -126,16 +129,11 @@ class HelperClassTempo:
             pd.DataFrame(columns=self.lista_colunas_salvar).to_csv(self.path_bd, sep=';', index=False)
         
         # colunas de clima
-        self.dict_map_clima = {'Sunny': 'muito sol [emoji_sol]',
-                               'Clear': 'sol [emoji_sol]',
-                               'Overcast': 'céu nublado [emoji_nuvem]',
-                               'Cloudy': 'céu nublado [emoji_nuvem]',
-                               'Partly cloudy': 'céu parcialmente nublado [emoji_nuvem]',
-                               'Light rain shower': 'chuvas leves [emoji_chuva_sol]',
-                               'Patchy rain possible': 'períodos de chuva ao longo do dia [emoji_chuva]',
-                               'Moderate or heavy rain shower': 'chuvas fortes ao longo do dia [emoji_chuva_relampago]'}
+        f = open("mapeamento_climas.json", mode="r", encoding="utf-8")
+        self.dict_map_clima = json.load(f)
+        f.close()
         
-        # colunas de clima
+        # colunas de pesca
         self.dict_map_pesca = {'Today is an excellent fishing day': 'Excelente',
                                'Today is a good fishing day': 'Bom',
                                'Today is an average fishing day': 'Mediano'}
@@ -341,10 +339,49 @@ class HelperClassTempo:
                     except Exception as e:
                         print (f'Erro na cidade {cidade}! {e}')
                         continue
-                   
+                
+                # trata melhor horário para pescar
+                try:
+                    horario1, horario2 = melhor_horario_pesca.split("-")
+                    horario1 = horario1.strip()
+                    horario2 = horario2.strip()
+
+                    # horario1
+                    if "am" in horario1:
+                        horario1 = horario1.split("am")[0]
+                    elif "pm" in horario1:
+                        horario1 = horario1.split("pm")[0]
+                        hora, minuto = horario1.split(":")
+                        hora = str(int(hora) + 12)
+                        if int(hora) == 12:
+                            hora = "0"
+                        horario1 = f"{hora}:{minuto}"
+
+                    # horario2
+                    if "am" in horario2:
+                        horario2 = horario2.split("am")[0]
+                    elif "pm" in horario2:
+                        horario2 = horario2.split("pm")[0]
+                        hora, minuto = horario2.split(":")
+                        hora = str(int(hora) + 12)
+                        if int(hora) == 12:
+                            hora = "0"
+                        horario2 = f"{hora}:{minuto}"
+
+                    melhor_horario_pesca = f"{horario1} - {horario2}"
+                
+                except:
+                    pass
                         
                 # por do sol
                 horario_por_sol = str(driver.find_element_by_xpath(self.path_horario_por_sol).text).split(' ')[1].strip()
+                if "am" in horario_por_sol:
+                    horario_por_sol = horario_por_sol.split("am")[0]
+                elif "pm" in horario_por_sol:
+                    horario_por_sol = horario_por_sol.split("pm")[0]
+                    hora, minuto = horario_por_sol.split(":")
+                    hora = str(int(hora) + 12)
+                    horario_por_sol = f"{hora}:{minuto}"
                 
                 # marés
                 try:
@@ -378,6 +415,13 @@ class HelperClassTempo:
                     
                 # altura da maior onda
                 altura_maior_onda = str(max(altura_mare_1, altura_mare_2, altura_mare_3, altura_mare_4))
+
+                # tratamento dos campos
+                altura_maior_onda = str(altura_maior_onda).replace('.',',')
+                altura_mare_1 = str(altura_mare_1).replace('.',',')
+                altura_mare_2 = str(altura_mare_2).replace('.',',')
+                altura_mare_3 = str(altura_mare_3).replace('.',',')
+                altura_mare_4 = str(altura_mare_4).replace('.',',')
                 
                 # texto onda
                 if (simbolo_mare_1 == ""):
@@ -524,7 +568,7 @@ class HelperClassTempo:
             umidade = int(df_linha['umidade'])
             vento = int(df_linha['vento'])
             pesca = df_linha['pesca']
-            altura_maior_onda = float(df_linha['altura_maior_onda'])
+            altura_maior_onda = df_linha['altura_maior_onda']
             
             # flag
             qtd_dias_temperatura_max = int(df_linha["qtd_dias_temperatura_max"])
@@ -567,7 +611,7 @@ class HelperClassTempo:
                 return "BOM_PESCAR"
             
             # mar não está para peixes
-            if (pesca not in ["Excelente", "Bom"] and altura_maior_onda > 1.6):
+            if (pesca not in ["Excelente", "Bom"] and float(altura_maior_onda.replace(",",".")) > self.altura_mare_ruim):
                 return "MAR_NAO_ESTA_PARA_PEIXES"
             
             # sol ultravioleta
@@ -674,8 +718,7 @@ class HelperClassTempo:
                               "[qtd_dias_nebulosidade_max]":qtd_dias_nebulosidade_max,
                               "[qtd_dias_umidade_max]":qtd_dias_umidade_max,
                               "[qtd_dias_vento_max]":qtd_dias_vento_max,
-                              "[qtd_dias_onda_max]":qtd_dias_onda_max,
-                
+                              "[qtd_dias_onda_max]":qtd_dias_onda_max
                              }
             
             # aplica substituições no template
@@ -686,6 +729,9 @@ class HelperClassTempo:
             for palavra in self.lista_palavras_analisador_lexico:
                 valor = self.get_analisador_lexico(palavra, numero, genero)
                 texto_selecionado = texto_selecionado.replace(f"[{palavra}]", valor)
+                
+            # atribui ordenação do discurso (discourse ordering)
+            texto_selecionado = self.discourse_ordering_object.discourse_ordering(intent, texto_selecionado)
             
             # adiciona pós-processamentos ao tweet
             tweet = f"{self.twitter_api.get_inicio_post()}{texto_selecionado.strip()}{self.twitter_api.get_fim_post()}"
@@ -871,7 +917,8 @@ class HelperClassTempo:
                 # verifica se tweet pode ser publicado                
                 if (self.twitter_api.valida_tweet(tweet)):
                     try:
-                        self.twitter_api.make_tweet(tweet, self.modulo, 'foto')
+                        lista_atributos = ', '.join(df_linha.values.tolist())
+                        self.twitter_api.make_tweet(tweet, self.modulo, intent, lista_atributos, 'foto')
                         print ('Tweet publicado')
 
                         # espera um tempo para publicar novamente

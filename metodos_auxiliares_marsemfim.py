@@ -75,7 +75,7 @@ class HelperClassMarsemfim:
                 
                 # gera resumo da notícia
                 try:
-                    soup = BeautifulSoup(requests.get(link).content)
+                    soup = BeautifulSoup(requests.get(link).content, features="lxml")
                     resumo_pt1 = soup.find("h2", {"style": "text-align: justify;"}).text
                     resumo_pt2 = soup.find("p", {"style": "text-align: justify;"}).text
                     resumo = f"{resumo_pt1}. {resumo_pt2}"
@@ -157,7 +157,7 @@ class HelperClassMarsemfim:
                 if self.twitter_api.verifica_tweet_pode_ser_publicado(tweet_0) and self.twitter_api.valida_tamanho_tweet(tweet_0):
                     
                     if (self.flag_resumo == 0 or len(resumo) <= 10 or len_lista_resumos == 0):
-                        self.twitter_api.make_tweet(tweet_0, self.modulo)
+                        self.twitter_api.make_tweet(tweet_0, self.modulo, "vazio", "vazio")
                         print ('Tweet publicado!')
                         contador_publicacoes+=1
                         continue
@@ -166,14 +166,14 @@ class HelperClassMarsemfim:
                         # valida resumos
                         for resumo in lista_resumos:
                             if not (self.twitter_api.verifica_tweet_pode_ser_publicado(resumo)):
-                                self.twitter_api.make_tweet(tweet_0, self.modulo)
+                                self.twitter_api.make_tweet(tweet_0, self.modulo, "vazio", "vazio")
                                 print ('Tweet publicado!')
                                 contador_publicacoes+=1
                                 continue
                          
                         # publica tweet e depois resumos
                         try:
-                            status = self.twitter_api.make_tweet(tweet_1, self.modulo)
+                            status = self.twitter_api.make_tweet(tweet_1, self.modulo, "vazio", "vazio")
                             status_id = str(status.id_str)
                         except:
                             continue
@@ -190,7 +190,7 @@ class HelperClassMarsemfim:
                                 resumo = f"{resumo} {self.twitter_api.dict_map_emoji['tres_pontos']}"
                             
                             # publica tweet do resumo
-                            status = self.twitter_api.make_tweet(resumo, self.modulo, tweet_id=str(status.id_str))
+                            status = self.twitter_api.make_tweet(resumo, self.modulo, "vazio", "vazio", tweet_id=str(status.id_str))
                     
                         print ('Tweet publicado!')
                         time.sleep(60)

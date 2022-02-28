@@ -44,6 +44,11 @@ class TwitterClass:
         self.lista_palavras_banidas = f.read().split('\n')
         f.close()
         
+        # se não existe arquivo de bd, cria
+        if not os.path.exists(self.path_twitter_bd):
+            pd.DataFrame(columns=['tweet', 'modulo', 'intent', 'lista_atributos', 'data']).\
+            to_csv(self.path_twitter_bd, sep=';', index=False)
+        
         # Autentica no Twitter
         try:
             # login API
@@ -72,7 +77,7 @@ class TwitterClass:
                                'surf':'\U0001F3C4',
                                'sol':'\U0001F324',
                                'sol_face':'\U0001F31E',
-                               'nuvem':'\U00012601',
+                               'nuvem':'\U0001F325',
                                'nuvem_sol':'\U0001F326',
                                'chuva':'\U0001F327',
                                'chuva_sol':'\U0001F326',
@@ -91,7 +96,6 @@ class TwitterClass:
                                'sono': '\U0001F634',
                                'bravo': '\U0001F92C',
                                'covid': '\U0001F637'
-
                                }
         
         # limite de caracteres
@@ -156,7 +160,7 @@ class TwitterClass:
     
     
     # publica o tweet
-    def make_tweet(self, tweet, modulo, modo_operacao='padrao', tweet_id=0):
+    def make_tweet(self, tweet, modulo, intent, lista_atributos, modo_operacao='padrao', tweet_id=0):
         """
         Publica um tweet utilizando a API do Twitter
         """
@@ -179,7 +183,7 @@ class TwitterClass:
 
                 # adiciona tweet ao bd
                 try:
-                    self.adiciona_tweet(tweet, modulo)
+                    self.adiciona_tweet(tweet, modulo, intent, lista_atributos)
                 except:
                     return 0
 
@@ -202,7 +206,7 @@ class TwitterClass:
 
                 # adiciona tweet ao bd
                 try:
-                    self.adiciona_tweet(tweet, modulo)
+                    self.adiciona_tweet(tweet, modulo, intent, lista_atributos)
                 except:
                     return 0
 
@@ -232,8 +236,8 @@ class TwitterClass:
         '''
         Verifica se o tweet está ok
         '''
-        df_tweets = pd.read_csv(self.path_twitter_bd, sep=';').dropna(subset=['Tweet'])
-        lista_tweets_publicados = df_tweets['Tweet'].values.tolist()
+        df_tweets = pd.read_csv(self.path_twitter_bd, sep=';').dropna(subset=['tweet'])
+        lista_tweets_publicados = df_tweets['tweet'].values.tolist()
         
         # verifica se conteúdo já foi postado
         for tweet_publicado in lista_tweets_publicados[:-100:-1]:
@@ -257,7 +261,7 @@ class TwitterClass:
         return texto
         
         
-    def adiciona_tweet(self, tweet, modulo):
+    def adiciona_tweet(self, tweet, modulo, intent, lista_atributos):
         '''
         Adiciona tweet ao bd
         '''
@@ -266,7 +270,7 @@ class TwitterClass:
         data_hoje = date.today().strftime("%d/%m/%Y")
         
         # adiciona linha
-        linha=[tweet, modulo, data_hoje]
+        linha=[tweet, modulo, intent, lista_atributos, data_hoje]
         
         # bd atual
         df_bd = pd.read_csv('tweets_bd.csv', sep=';', encoding='utf-8')

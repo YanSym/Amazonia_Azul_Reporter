@@ -119,7 +119,7 @@ class HelperClassNews:
 
                 # verifica se tweet está ok
                 if (self.twitter_api.verifica_tweet_pode_ser_publicado(tweet) and self.twitter_api.valida_tamanho_tweet(tweet)):
-                    status = self.twitter_api.make_tweet(tweet, self.modulo)
+                    status = self.twitter_api.make_tweet(tweet, self.modulo, "vazio", "vazio")
                     if (status != 0):
                         print (tweet)
                         print ('Tweet publicado!')

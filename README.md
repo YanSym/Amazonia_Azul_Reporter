@@ -12,7 +12,7 @@ Os Dados não linguísticos sobre a Amazônia Azul foram extraídos com permiss�
 - Tideschart (https://www.tideschart.com)
 - Marine Traffic (https://www.marinetraffic.com)
 - Mar Sem Fim (https://marsemfim.com.br)
-- Centro de Sismologia da USP (http://www.moho.iag.usp.br/)
+- Centro de Sismologia da USP (http://www.moho.iag.usp.br)
 
 # Execução
 Uma vez que todas as dependências são resolvidas, o robô-jornalista pode ser executado através dos seguintes arquivos:

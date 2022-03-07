@@ -5,10 +5,10 @@
     "[inicio]",
     "[inicio]",
     "[inicio]",
-    "[inicio]Bom dia! Como vocês estão?\n",
-    "[inicio]Bom dia a todos! ",
+    "[inicio][Bom dia]! Como vocês estão?\n",
+    "[inicio][Bom dia] a todos! ",
+    "[inicio]Olá! [Bom dia] a todos! ",
     "[fim]\nDesejamos um bom dia para todos!",
-    "[fim]\nDesejamos um excelente dia para todos!",
-    "[fim]\nUm bom dia para todos!"
+    "[fim]\nDesejamos um excelente dia para todos!"
     ]
 }

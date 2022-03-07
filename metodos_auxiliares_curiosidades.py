@@ -4,6 +4,7 @@ import numpy as np
 import random
 import json
 import sys
+import os
 from twitter_api import TwitterClass
 
 class CuriosidadesClass:
@@ -11,16 +12,6 @@ class CuriosidadesClass:
     Classe de curiosidades
     """
     def __init__(self):
-        
-        # path json curiosidades
-        path_curiosidades = "curiosidades.csv"
-        
-        # API do Twitter
-        self.twitter_api = TwitterClass()
-        
-        # curiosidades
-        self.lista_curiosidades = pd.read_csv("curiosidades.csv", sep=';', encoding='utf-8', header=None)[0]
-        self.modulo = 'curiosidades'
         
         # mapeamento de meses
         self.dict_map_mes = {1: 'janeiro',
@@ -36,6 +27,22 @@ class CuriosidadesClass:
                              11: 'novembro',
                              12: 'dezembro'
                              }
+        
+        # dia atual
+        print (self.get_dia_atual())
+        
+        # path atual
+        self.current_path = str(os.getcwd())
+        
+        # path json curiosidades
+        path_curiosidades = os.path.join(self.current_path, "curiosidades.csv")
+        
+        # API do Twitter
+        self.twitter_api = TwitterClass()
+        
+        # curiosidades
+        self.lista_curiosidades = pd.read_csv(path_curiosidades, sep=';', encoding='utf-8', header=None)[0]
+        self.modulo = 'curiosidades'
 
     
     def seleciona_curiosidade(self):

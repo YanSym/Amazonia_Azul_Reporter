@@ -6,13 +6,13 @@ import urllib
 import json
 import time
 import sys
-import os
-from datetime import date
 import datetime
+from datetime import date
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from discourse_ordering import DiscourseOrderingClass
 from twitter_api import TwitterClass
+import os
 
 
 class HelperClassTempo:
@@ -21,18 +21,39 @@ class HelperClassTempo:
     """
     def __init__(self):
         
+        # mapeamento de meses
+        self.dict_map_mes = {1: 'janeiro',
+                             2: 'fevereiro',
+                             3: 'março',
+                             4: 'abril',
+                             5: 'maio',
+                             6: 'junho',
+                             7: 'julho',
+                             8: 'agosto',
+                             9: 'setembro',
+                             10: 'outubro',
+                             11: 'novembro',
+                             12: 'dezembro'
+                             }
+        
+        # dia atual
+        print (self.get_dia_atual())
+        
+        # path atual
+        self.current_path = str(os.getcwd())
+        
         # path do chromedriver
-        self.path_to_chromedriver = 'chromedriver'
+        self.path_to_chromedriver = os.path.join(self.current_path, 'chromedriver')
         
         # API do Twitter
         self.twitter_api = TwitterClass()
         
         # arquivos auxiliares
-        self.path_infos_cidades="cidades.csv"
-        self.path_bd = "cidades_bd.csv"
-        path_credenciais_user_agent = "credenciais_user_agent.json"
-        path_intents = "intents.json"
-        path_analisador_lexico = "analisador_lexico.json"
+        self.path_infos_cidades = os.path.join(self.current_path, "cidades.csv")
+        self.path_bd = os.path.join(self.current_path, "cidades_bd.csv")
+        path_credenciais_user_agent = os.path.join(self.current_path, "credenciais_user_agent.json")
+        path_intents = os.path.join(self.current_path, "intents.json")
+        path_analisador_lexico = os.path.join(self.current_path, "analisador_lexico.json")
         self.discourse_ordering_object = DiscourseOrderingClass()
         
         # leitura do arquivo json com as credenciais
@@ -168,6 +189,17 @@ class HelperClassTempo:
         self.path_mare3 = '//*[@id="main-content"]/div/div/div/div[1]/div[3]/div/div/table/tbody/tr[1]/td[4]'
         self.path_mare4 = '//*[@id="main-content"]/div/div/div/div[1]/div[3]/div/div/table/tbody/tr[1]/td[5]'
 
+    
+    def get_dia_atual(self):
+        '''
+        data de hoje
+        '''
+        # data de hoje
+        dia = date.today().strftime("%d")
+        mes = self.dict_map_mes[int(date.today().strftime("%m"))]
+        ano = date.today().strftime("%Y")
+        return f"{dia} de {mes} de {ano}"
+    
     
     def trata_mare(self, elemento):
         '''

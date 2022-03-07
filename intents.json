@@ -239,11 +239,17 @@
     
 "TERREMOTO_0":
 [
-"O Centro de Sismologia da USP detectou hoje ([data_hoje]) um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.",
+"O Centro de Sismologia da USP detectou hoje ([data_hoje]) um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
     
-"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da USP um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.",
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da USP um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
     
-"Um pequeno terremoto em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da USP. Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros."
+"Um pequeno terremoto em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da USP. Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
+    
+"O Centro de Sismologia da USP detectou hoje ([data_hoje]) um tremor em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da USP um tremor em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
+    
+"Um tremor em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da USP. Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP."
 ],
     
     
@@ -253,7 +259,13 @@
     
 "Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da USP um pequeno terremoto em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
     
-"Um pequeno terremoto em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da USP. Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP."
+"Um pequeno terremoto em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da USP. Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
+    
+"O Centro de Sismologia da USP detectou hoje ([data_hoje]) um tremor em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
+    
+"Foi detectado hoje ([data_hoje]) pelo Centro de Sismologia da USP um tremor em [localizacao], com uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP.",
+    
+"Um tremor em [localizacao] foi identificado hoje ([data_hoje]) pelo Centro de Sismologia da USP. Ele apresenta uma magnitude de [magnitude] mB e profundidade de [profundidade] quilômetros.\nPara mais informações: @sismoUSP."
 ],
     
     

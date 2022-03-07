@@ -19,16 +19,37 @@ class TerremotosClass:
     """
     def __init__(self):
         
+        # mapeamento de meses
+        self.dict_map_mes = {1: 'janeiro',
+                             2: 'fevereiro',
+                             3: 'março',
+                             4: 'abril',
+                             5: 'maio',
+                             6: 'junho',
+                             7: 'julho',
+                             8: 'agosto',
+                             9: 'setembro',
+                             10: 'outubro',
+                             11: 'novembro',
+                             12: 'dezembro'
+                             }
+        
+        # dia atual
+        print (self.get_dia_atual())
+        
+        # path atual
+        self.current_path = str(os.getcwd())
+        
         # path do chromedriver
-        self.path_to_chromedriver = 'chromedriver'
+        self.path_to_chromedriver = os.path.join(self.current_path, 'chromedriver')
         
         # API do Twitter
         self.twitter_api = TwitterClass()
         
         # arquivos auxiliares
-        self.path_bd = "terremotos_bd.csv"
-        path_intents = "intents.json"
-        path_analisador_lexico = "analisador_lexico.json"
+        self.path_bd = os.path.join(self.current_path, "terremotos_bd.csv")
+        path_intents = os.path.join(self.current_path, "intents.json")
+        path_analisador_lexico = os.path.join(self.current_path, "analisador_lexico.json")
         self.discourse_ordering_object = DiscourseOrderingClass()
         
         # leitura do arquivo json com os intents
@@ -61,21 +82,6 @@ class TerremotosClass:
         self.qtd_max_terremotos = 10
         self.max_tentativas = 10
         self.modulo = 'terremotos'
-        
-        # mapeamento de meses
-        self.dict_map_mes = {1: 'janeiro',
-                             2: 'fevereiro',
-                             3: 'março',
-                             4: 'abril',
-                             5: 'maio',
-                             6: 'junho',
-                             7: 'julho',
-                             8: 'agosto',
-                             9: 'setembro',
-                             10: 'outubro',
-                             11: 'novembro',
-                             12: 'dezembro'
-                             }
         
         # colunas para atribuir valor
         self.lista_colunas = ['data',

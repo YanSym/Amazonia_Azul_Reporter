@@ -1,3 +1,4 @@
+import datetime
 import random
 import json
 
@@ -17,6 +18,23 @@ class DiscourseOrderingClass:
         adiciona ao texto um início ou fim aleatoriamente selecionado
         '''
         valor = random.choice(self.lista_frases)
+        
+        # substitui bom dia, caso se aplique
+        hora_atual = int(datetime.datetime.now().hour)
+        
+        # dia
+        if hora_atual <= 11:
+            valor = valor.replace("[Bom dia]", "Bom dia")
+          
+        # noite
+        elif hora_atual >= 19:
+            valor = valor.replace("[Bom dia]", "Boa noite")
+          
+        # tarde
+        else:
+            valor = valor.replace("[Bom dia]", "Boa tarde")
+        
+        # substitui valor
         if 'inicio' in valor:
             return valor.replace("[inicio]", "").replace("[fim]", "") + frase
         else:
@@ -41,5 +59,3 @@ class DiscourseOrderingClass:
             return self.adiciona_inicio_fim(frase_final)
         else:
             return self.adiciona_inicio_fim(frase)
-
-

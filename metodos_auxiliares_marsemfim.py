@@ -8,6 +8,7 @@ import time
 import json
 import sys
 import re
+import os
 from datetime import date
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -20,8 +21,29 @@ class HelperClassMarsemfim:
     """
     def __init__(self):
         
+        # mapeamento de meses
+        self.dict_map_mes = {1: 'janeiro',
+                             2: 'fevereiro',
+                             3: 'março',
+                             4: 'abril',
+                             5: 'maio',
+                             6: 'junho',
+                             7: 'julho',
+                             8: 'agosto',
+                             9: 'setembro',
+                             10: 'outubro',
+                             11: 'novembro',
+                             12: 'dezembro'
+                             }
+        
+        # dia atual
+        print (self.get_dia_atual())
+        
+        # path atual
+        self.current_path = str(os.getcwd())
+        
          # path do chromedriver
-        self.path_to_chromedriver = 'chromedriver'
+        self.path_to_chromedriver = os.path.join(self.current_path, 'chromedriver')
         
         # API do Twitter
         self.twitter_api = TwitterClass()
@@ -94,6 +116,17 @@ class HelperClassMarsemfim:
             return lista_news
         except:
             sys.exit(0)
+            
+            
+    def get_dia_atual(self):
+        '''
+        data de hoje
+        '''
+        # data de hoje
+        dia = date.today().strftime("%d")
+        mes = self.dict_map_mes[int(date.today().strftime("%m"))]
+        ano = date.today().strftime("%Y")
+        return f"{dia} de {mes} de {ano}"
     
     
     def prepara_lista_resumos(self, resumo):

@@ -13,11 +13,14 @@ class TwitterClass:
     """
     def __init__(self):
         
+        # path atual
+        self.current_path = sys.path[0]
+        
         # path json twitter
-        path_infos_json = "credenciais_twitter.json"
-        path_json_flag_publicacao = "flag_publicacao.json"
-        path_palavras_banidas = "lista_palavras_banidas.txt"
-        self.path_twitter_bd = "tweets_bd.csv"
+        path_infos_json = os.path.join(self.current_path, "credenciais_twitter.json")
+        path_json_flag_publicacao = os.path.join(self.current_path, "flag_publicacao.json")
+        path_palavras_banidas = os.path.join(self.current_path, "lista_palavras_banidas.txt")
+        self.path_twitter_bd = os.path.join(self.current_path, "tweets_bd.csv")
     
         # leitura do arquivo json com as credenciais
         f = open(path_infos_json, "r")
@@ -273,7 +276,7 @@ class TwitterClass:
         linha=[tweet, modulo, intent, lista_atributos, data_hoje]
         
         # bd atual
-        df_bd = pd.read_csv('tweets_bd.csv', sep=';', encoding='utf-8')
+        df_bd = pd.read_csv(self.path_twitter_bd, sep=';', encoding='utf-8')
         
         # insere linha
         df_bd.loc[-1] = linha
@@ -281,4 +284,4 @@ class TwitterClass:
         df_bd = df_bd.sort_index()
         
         # salva bd atualizado em csv
-        df_bd.to_csv('tweets_bd.csv', sep=';', index=False)
+        df_bd.to_csv(self.path_twitter_bd, sep=';', index=False)

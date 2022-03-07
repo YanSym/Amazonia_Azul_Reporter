@@ -6,4 +6,9 @@ requests==2.26.0
 beautifulsoup4==4.9.1
 opencv-python==4.5.4.60
 python-Levenshtein==0.12.2
+BeautifulSoup4==4.9.1
 Cython>=0.29
+lxml==4.5.2
+nltk==3.5
+unidecode
+pillow

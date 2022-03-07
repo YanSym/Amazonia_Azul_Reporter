@@ -5,6 +5,7 @@ import urllib
 import time
 import json
 import sys
+import os
 from datetime import date
 from bs4 import BeautifulSoup
 from twitter_api import TwitterClass
@@ -16,8 +17,29 @@ class HelperClassNews:
     """
     def __init__(self):
         
+        # mapeamento de meses
+        self.dict_map_mes = {1: 'janeiro',
+                             2: 'fevereiro',
+                             3: 'março',
+                             4: 'abril',
+                             5: 'maio',
+                             6: 'junho',
+                             7: 'julho',
+                             8: 'agosto',
+                             9: 'setembro',
+                             10: 'outubro',
+                             11: 'novembro',
+                             12: 'dezembro'
+                             }
+        
+        # dia atual
+        print (self.get_dia_atual())
+        
+        # path atual
+        self.current_path = str(os.getcwd())
+        
         # arquivos auxiliares
-        path_json_parametros_news="parametros_news.json"
+        path_json_parametros_news = os.path.join(self.current_path, "parametros_news.json")
         
         # API do Twitter
         self.twitter_api = TwitterClass()
@@ -27,10 +49,22 @@ class HelperClassNews:
         self.url_google_news = "https://news.google.com"
     
         # lista de pesquisas
-        self.lista_pesquisas = pd.read_csv("pesquisas.csv", sep=';', encoding='utf-8', header=None)[0]
+        path_pesquisas = os.path.join(self.current_path, "pesquisas.csv")
+        self.lista_pesquisas = pd.read_csv(path_pesquisas, sep=';', encoding='utf-8', header=None)[0]
         self.max_news_check = 5
         self.max_publicacoes = 3
         self.modulo = 'noticias'
+        
+        
+    def get_dia_atual(self):
+        '''
+        data de hoje
+        '''
+        # data de hoje
+        dia = date.today().strftime("%d")
+        mes = self.dict_map_mes[int(date.today().strftime("%m"))]
+        ano = date.today().strftime("%Y")
+        return f"{dia} de {mes} de {ano}"
     
     
     def prepara_tweet(self, noticia, link):

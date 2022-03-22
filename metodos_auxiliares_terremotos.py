@@ -12,6 +12,8 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from discourse_ordering import DiscourseOrderingClass
 from twitter_api import TwitterClass
+from shapely.geometry.polygon import Polygon
+from shapely.geometry import Point
 
 class TerremotosClass:
     """
@@ -80,7 +82,6 @@ class TerremotosClass:
         # parâmetros
         self.tempo_espera_tweet_segundos = 60
         self.qtd_max_terremotos = 10
-        self.max_tentativas = 10
         self.modulo = 'terremotos'
         
         # colunas para atribuir valor
@@ -96,6 +97,20 @@ class TerremotosClass:
         
         # data de hoje
         self.data_hoje = self.get_dia_atual()
+        
+        # área de interesse
+        self.area_interesse = Polygon([(18.09, -39.05),
+                                       (-1.28, -15.92),
+                                       (-20.76, -8.2),
+                                       (-38.24, -18.7),
+                                       (-32.50, -53.4),
+                                       (-27.518, -49.5),
+                                       (-24.11, -47.9),
+                                       (-21.93, -42.7),
+                                       (-11.87, -39.3),
+                                       (-7.04, -36.3),
+                                       (-2.16, -50.9),
+                                       (3.28, -52.35)])
         
     
     def get_dia_atual(self):
@@ -133,29 +148,32 @@ class TerremotosClass:
             valor_atual = ""
             for linha in tabela[1:21]:
                 valores = linha.find_all("td")
+                lat = float(valores[2].get_text().split(" ")[0].strip())
+                long = float(valores[1].get_text().split(" ")[0].strip())
                 data_info = valores[0].get_text().split(" ")[0].strip()
                 profundidade = str(float(valores[3].get_text())).strip()
-                magnitude = valores[5].get_text().split(" ")[0].strip()
+                magnitude = valores[5].get_text().strip()
                 localizacao = valores[6].get_text().strip()
                 
-                # ajuste no campo de magnitude
-                try:
-                    magnitude = magnitude.split("xa")[1]
-                except:
-                    pass
+                # verifica se ponto está na área de interesse
+                ponto = Point(lat, long)
+                if not self.area_interesse.contains(ponto):
+                    continue
+                        
+                # ignora se profundidade <= 0
+                if float(profundidade) <= 0:
+                    continue
                 
                 # check para obter data única
                 if data_info != valor_atual and valor_atual != "":
                     break
                 else:
                     valor_atual = data_info
-                        
-                # ignora se profundidade <= 0
-                if float(profundidade) <= 0:
-                    continue
-                print (data_info, profundidade, magnitude, localizacao)
 
-                # salva lista
+                # print
+                print (data_info, profundidade, magnitude, localizacao)
+                
+                # salva valores na lista
                 lista_infos.append([data_hoje,
                                     data_info,
                                     localizacao,
@@ -205,8 +223,8 @@ class TerremotosClass:
         '''
         
         try:
-            # campos principais
-            magnitude = float(df_linha['magnitude'])
+            magnitude = float(df_linha['magnitude'].split(" ")[0])
+            print (magnitude)
             
             # escala 5
             if magnitude >= 8.0:

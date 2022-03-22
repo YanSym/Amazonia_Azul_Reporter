@@ -63,7 +63,7 @@ class HelperClassTempo:
             self.user_agent = infos_login['user_agent']
             f.close()
         except:
-            self.user_agent = {"user_agent":"temporary_agent"}
+            self.user_agent = "temporary_agent"
         
         # leitura do arquivo json com os intents
         f = open(path_intents, encoding='utf-8', mode="r")
@@ -89,7 +89,7 @@ class HelperClassTempo:
         self.chromeOptions = webdriver.ChromeOptions()
         self.chromeOptions.add_argument('--no-sandbox')
         self.chromeOptions.add_argument("--headless")
-        self.chromeOptions.add_argument(f"User-Agent={self.user_agent}")
+        self.chromeOptions.add_argument(f"user-agent={self.user_agent}")
         
         # parâmetros
         self.url_tabua_mares = "https://www.tideschart.com"
@@ -369,41 +369,41 @@ class HelperClassTempo:
                     try:
                         melhor_horario_pesca = driver.find_element_by_xpath(self.path_melhor_horario_pesca1).text.split('From ')[1].replace(' to ', ' - ')
                     except Exception as e:
-                        print (f'Erro na cidade {cidade}! {e}')
-                        continue
+                        melhor_horario_pesca = ''
                 
                 # trata melhor horário para pescar
-                try:
-                    horario1, horario2 = melhor_horario_pesca.split("-")
-                    horario1 = horario1.strip()
-                    horario2 = horario2.strip()
+                if melhor_horario_pesca != '':
+                    try:
+                        horario1, horario2 = melhor_horario_pesca.split("-")
+                        horario1 = horario1.strip()
+                        horario2 = horario2.strip()
 
-                    # horario1
-                    if "am" in horario1:
-                        horario1 = horario1.split("am")[0]
-                    elif "pm" in horario1:
-                        horario1 = horario1.split("pm")[0]
-                        hora, minuto = horario1.split(":")
-                        hora = str(int(hora) + 12)
-                        if int(hora) == 12:
-                            hora = "0"
-                        horario1 = f"{hora}:{minuto}"
+                        # horario1
+                        if "am" in horario1:
+                            horario1 = horario1.split("am")[0]
+                        elif "pm" in horario1:
+                            horario1 = horario1.split("pm")[0]
+                            hora, minuto = horario1.split(":")
+                            hora = str(int(hora) + 12)
+                            if int(hora) == 12:
+                                hora = "0"
+                            horario1 = f"{hora}:{minuto}"
 
-                    # horario2
-                    if "am" in horario2:
-                        horario2 = horario2.split("am")[0]
-                    elif "pm" in horario2:
-                        horario2 = horario2.split("pm")[0]
-                        hora, minuto = horario2.split(":")
-                        hora = str(int(hora) + 12)
-                        if int(hora) == 12:
-                            hora = "0"
-                        horario2 = f"{hora}:{minuto}"
+                        # horario2
+                        if "am" in horario2:
+                            horario2 = horario2.split("am")[0]
+                        elif "pm" in horario2:
+                            horario2 = horario2.split("pm")[0]
+                            hora, minuto = horario2.split(":")
+                            hora = str(int(hora) + 12)
+                            if int(hora) == 12:
+                                hora = "0"
+                            horario2 = f"{hora}:{minuto}"
 
-                    melhor_horario_pesca = f"{horario1} - {horario2}"
-                
-                except:
-                    pass
+                        melhor_horario_pesca = f"{horario1} - {horario2}"
+
+                    except:
+                        pass
                         
                 # por do sol
                 horario_por_sol = str(driver.find_element_by_xpath(self.path_horario_por_sol).text).split(' ')[1].strip()
@@ -639,7 +639,7 @@ class HelperClassTempo:
                 return "ONDA_MAXIMA"
             
             # muito bom para pescar
-            if pesca == "Excelente":
+            if pesca == "Excelente" and melhor_horario_pesca != '':
                 return "BOM_PESCAR"
             
             # mar não está para peixes
@@ -674,6 +674,10 @@ class HelperClassTempo:
             
             if (temperatura == temperatura_max and temperatura_max == temperatura_min):
                 return "TEMP_IGUAIS"
+            
+            # pesca incorreta
+            if melhor_horario_pesca == '':
+                return 'NORMAL_PESCA_INCORRETA'
 
             # se não caiu em nenhum caso, retorna comportamento usual
             return 'NORMAL'
@@ -928,7 +932,7 @@ class HelperClassTempo:
                 
                 # salva foto
                 with open("foto.png", "wb") as f:
-                    f.write(requests.get(df_linha['url_imagem'], headers={'User-Agent': self.user_agent}).content)
+                    f.write(requests.get(df_linha['url_imagem'], headers={'user-agent': self.user_agent}).content)
                 time.sleep(1)
 
                 # intent do conjunto de dados
